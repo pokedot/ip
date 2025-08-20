@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class FlyingNugget {
@@ -15,6 +17,7 @@ public class FlyingNugget {
         String name = "FlyingNugget";
         String line = "\t____________________________________________________________";
         Scanner scanner = new Scanner(System.in);
+        List<String> tasks = new ArrayList<>();
 
         System.out.println(intro);
         System.out.println(line);
@@ -26,9 +29,16 @@ public class FlyingNugget {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
                 break;
+            } else if (input.equals("list")) {
+                System.out.println(line);
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println("\t" + (i + 1) + ". " + tasks.get(i));
+                }
+                System.out.println(line);
             } else {
                 System.out.println(line);
-                System.out.println("\t" + input);
+                tasks.add(input);
+                System.out.println("\t added: " + input);
                 System.out.println(line);
             }
         }
