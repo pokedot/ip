@@ -1,18 +1,31 @@
 import java.util.*;
 
+/**
+ * The FlyingNugget class is a task management chatbot
+ * that allows users to add/delete tasks and mark/unmark their completions.
+ * It supports Todo, Event, and Deadline tasks.
+ */
 public class FlyingNugget {
     private static final String INTRO = """
-            Hello from
-             _____ _       _             _   _                        _
-            |  ___| |_   _(_)_ __   __ _| \\ | |_   _  __ _  __ _  ___| |_
-            | |_  | | | | | | '_ \\ / _` |  \\| | | | |/ _` |/ _` |/ _ \\ __|
-            |  _| | | |_| | | | | | (_| | |\\  | |_| | (_| | (_| |  __/ |_
-            |_|   |_|\\__, |_|_| |_|\\__, |_| \\_|\\__,_|\\__, |\\__, |\\___|\\__|
-                     |___/         |___/             |___/ |___/
-            """;
+        Hello from
+         _____ _       _             _   _                        _
+        |  ___| |_   _(_)_ __   __ _| \\ | |_   _  __ _  __ _  ___| |_
+        | |_  | | | | | | '_ \\ / _` |  \\| | | | |/ _` |/ _` |/ _ \\ __|
+        |  _| | | |_| | | | | | (_| | |\\  | |_| | (_| | (_| |  __/ |_
+        |_|   |_|\\__, |_|_| |_|\\__, |_| \\_|\\__,_|\\__, |\\__, |\\___|\\__|
+                 |___/         |___/             |___/ |___/
+        """;
     private static final String NAME = "FlyingNugget";
     private static final String LINE = "\t____________________________________________________________";
 
+    /**
+     * The main entry point for the chatbot.
+     * Reads user input and performs actions like adding/deleting/marking/unmarking tasks
+     * and displaying the current list of tasks.
+     *
+     * @param args (not used)
+     * @throws UnknownActionException if the user enters an unknown action
+     */
     public static void main(String[] args) throws UnknownActionException {
         Scanner scanner = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
@@ -110,6 +123,13 @@ public class FlyingNugget {
         scanner.close();
     }
 
+    /**
+     * Adds a task to the task list and prints its corresponding messages.
+     *
+     * @param task the Task object to add
+     * @param tasks the current list of tasks
+     * @param lines the current List of messages to print
+     */
     private static void addTask(Task task, List<Task> tasks, List<String> lines) {
         tasks.add(task);
         lines.add("Got it. I've added this task:");
@@ -121,6 +141,11 @@ public class FlyingNugget {
         }
     }
 
+    /**
+     * Prints all messages per action in an enclosed box.
+     *
+     * @param messages one or more Strings to print in the box
+     */
     private static void printBox(String... messages) {
         System.out.println(LINE);
         for (String msg : messages) {
@@ -128,5 +153,4 @@ public class FlyingNugget {
         }
         System.out.println(LINE);
     }
-
 }
