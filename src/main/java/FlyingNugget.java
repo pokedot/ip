@@ -13,7 +13,7 @@ public class FlyingNugget {
     private static final String NAME = "FlyingNugget";
     private static final String LINE = "\t____________________________________________________________";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnknownActionException {
         Scanner scanner = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
         boolean isRunning = true;
@@ -39,31 +39,71 @@ public class FlyingNugget {
                     }
                     break;
 
-                case "mark": {
-                    int taskNumber = Integer.parseInt(input.split(" ")[1]);
-                    lines.add("Nice! I've marked this task as done:");
-                    lines.add("  " + tasks.get(taskNumber - 1).markAsDone());
+                case "mark":
+                    try {
+                        int taskNumber = Integer.parseInt(input.split(" ")[1]);
+                        String taskInfo = tasks.get(taskNumber - 1).markAsDone();
+                        lines.add("Nice! I've marked this task as done:");
+                        lines.add("  " + taskInfo);
+                    } catch (NumberFormatException e) {
+                        lines.add("I need a valid number to help!");
+                        lines.add("(Ensure your mark is of the following format: \"mark [number]\".)");
+                    } catch (IndexOutOfBoundsException e) {
+                        lines.add("This task number does not exist in my list!");
+                        lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
+                    }
                     break;
-                }
 
-                case "unmark": {
-                    int taskNumber = Integer.parseInt(input.split(" ")[1]);
-                    lines.add("OK, I've marked this task as not done yet:");
-                    lines.add("  " + tasks.get(taskNumber - 1).markAsUndone());
+
+                case "unmark":
+                    try {
+                        int taskNumber = Integer.parseInt(input.split(" ")[1]);
+                        String taskInfo = tasks.get(taskNumber - 1).markAsUndone();
+                        lines.add("OK, I've marked this task as not done yet:");
+                        lines.add("  " + taskInfo);
+                    } catch (NumberFormatException e) {
+                        lines.add("I need a valid number to help!");
+                        lines.add("(Ensure your unmark is of the following format: \"unmark [number]\".)");
+                    } catch (IndexOutOfBoundsException e) {
+                        lines.add("This task number does not exist in my list!");
+                        lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
+                    }
                     break;
-                }
 
                 case "todo":
-                    addTask(new Todo(input), tasks, lines);
+                    try {
+                        addTask(new Todo(input), tasks, lines);
+                    } catch (MissingTaskException e) {
+                        lines.add("I need a task to schedule your todo!");
+                        lines.add("(Ensure your todo is of the following format: \"todo [task]\".)");
+                    }
                     break;
 
+
                 case "deadline":
-                    addTask(new Deadline(input), tasks, lines);
+                    try {
+                        addTask(new Deadline(input), tasks, lines);
+                    } catch (MissingTaskException e) {
+                        lines.add("I need a task and a due date to schedule your deadline!");
+                        lines.add("(Ensure your deadline is of the following format: \"deadline [task] /by [dueDate]\".)");
+                    }
                     break;
 
                 case "event":
-                    addTask(new Event(input), tasks, lines);
+                    try {
+                        addTask(new Event(input), tasks, lines);
+                    } catch (MissingTaskException e) {
+                        lines.add("I need a task, start date, and end date to schedule your event!");
+                        lines.add("(Ensure your event is of the following format: \"event [task] /from [start] /to [end]\".)");
+                    }
                     break;
+
+                default:
+                    try {
+                        throw new UnknownActionException();
+                    } catch (UnknownActionException e) {
+                        lines.add("I have never seen that action before!");
+                    }
             }
             printBox(lines.toArray(new String[0]));
         }
