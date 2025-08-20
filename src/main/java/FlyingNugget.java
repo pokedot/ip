@@ -92,7 +92,6 @@ public class FlyingNugget {
                     }
                     break;
 
-
                 case "deadline":
                     try {
                         addTask(new Deadline(input), tasks, lines);
@@ -108,6 +107,19 @@ public class FlyingNugget {
                     } catch (MissingTaskException e) {
                         lines.add("I need a task, start date, and end date to schedule your event!");
                         lines.add("(Ensure your event is of the following format: \"event [task] /from [start] /to [end]\".)");
+                    }
+                    break;
+
+                case "delete":
+                    try {
+                        int taskNumber = Integer.parseInt(input.split(" ")[1]);
+                        deleteTask(taskNumber, tasks, lines);
+                    } catch (NumberFormatException e) {
+                        lines.add("I need a valid number to help!");
+                        lines.add("(Ensure your delete is of the following format: \"delete [number]\".)");
+                    } catch (IndexOutOfBoundsException e) {
+                        lines.add("This task number does not exist in my list!");
+                        lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
                     }
                     break;
 
@@ -128,7 +140,7 @@ public class FlyingNugget {
      *
      * @param task the Task object to add
      * @param tasks the current list of tasks
-     * @param lines the current List of messages to print
+     * @param lines the current list of messages to print
      */
     private static void addTask(Task task, List<Task> tasks, List<String> lines) {
         tasks.add(task);
@@ -142,9 +154,27 @@ public class FlyingNugget {
     }
 
     /**
-     * Prints all messages per action in an enclosed box.
+     * Deletes a task from the task list and prints its corresponding messages.
      *
-     * @param messages one or more Strings to print in the box
+     * @param taskNumber the index of the task to remove from tasks
+     * @param tasks the current list of tasks
+     * @param lines the current list of messages to print
+     */
+    private static void deleteTask(int taskNumber, List<Task> tasks, List<String> lines) {
+        Task task = tasks.remove(taskNumber - 1);
+        lines.add("Noted. I've removed this task:");
+        lines.add("  " + task.toString());
+        if (tasks.size() == 1) {
+            lines.add("Now you have " + tasks.size() + " task in the list.");
+        } else {
+            lines.add("Now you have " + tasks.size() + " tasks in the list.");
+        }
+    }
+
+    /**
+     * Prints all messages per action in an enclosed box with a tab indent.
+     *
+     * @param messages one or more strings to print in the box
      */
     private static void printBox(String... messages) {
         System.out.println(LINE);

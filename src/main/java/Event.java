@@ -48,6 +48,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + (this.getDone() ? "[X] " : "[ ] ") + " (from: " + this.start + " to: " + this.end + ")";
+        return "[E]" + (this.getDone() ? "[X] " : "[ ] ") + this.getItem() + " (from: " + this.start + " to: " + this.end + ")";
     }
 }
