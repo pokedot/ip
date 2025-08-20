@@ -4,6 +4,12 @@ event meet friend /from Tue 1pm /to Wed 1pm
 list
 mark 2
 mark 3
+todo check bank account
 unmark 2
+delete 1
+mark 4
+event project outing /from June 7th 10am /to 6pm
+mark 1
+delete 4
 list
 bye
