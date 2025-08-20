@@ -7,6 +7,14 @@ public class Task {
         this.item = item;
     }
 
+    public boolean getDone() {
+        return this.done;
+    }
+
+    public String getItem() {
+        return this.item;
+    }
+
     public String markAsDone() {
         this.done = true;
         return this.toString();
@@ -16,13 +24,4 @@ public class Task {
         this.done = false;
         return this.toString();
     }
-
-    public String toString() {
-        if (done) {
-            return "[X] " + this.item;
-        } else {
-            return "[ ] " + this.item;
-        }
-    }
-
 }

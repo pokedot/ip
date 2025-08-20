@@ -1,6 +1,4 @@
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class FlyingNugget {
     private static final String INTRO = """
@@ -12,48 +10,75 @@ public class FlyingNugget {
             |_|   |_|\\__, |_|_| |_| \\__, |_| \\_| \\__,_| \\__, |\\__, |\\___|\\__|
                      |___/         |___/             |___/ |___/ |___/
             """;
-
     private static final String NAME = "FlyingNugget";
     private static final String LINE = "\t____________________________________________________________";
-    private static final Pattern MARK = Pattern.compile("mark (\\d+)");
-    private static final Pattern UNMARK = Pattern.compile("unmark (\\d+)");
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
+        boolean isRunning = true;
         System.out.println(INTRO);
         printBox("Hello! I'm " + NAME,
                 "What can I do for you?");
 
-        while (true) {
-            String input = scanner.nextLine();
-            Matcher markMatcher = MARK.matcher(input);
-            Matcher unmarkMatcher = UNMARK.matcher(input);
+        while (isRunning) {
+            String input = scanner.nextLine().strip();
+            String action = input.split(" ")[0];
             List<String> lines = new ArrayList<>();
-            if (input.equals("bye")) {
-                break;
-            } else if (input.equals("list")) {
-                lines.add("Here are the tasks in your list:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    lines.add((i + 1) + "." + tasks.get(i));
+
+            switch (action) {
+                case "bye":
+                    isRunning = false;
+                    lines.add("Bye. Hope to see you again soon!");
+                    break;
+
+                case "list":
+                    lines.add("Here are the tasks in your list:");
+                    for (int i = 0; i < tasks.size(); i++) {
+                        lines.add((i + 1) + "." + tasks.get(i));
+                    }
+                    break;
+
+                case "mark": {
+                    int taskNumber = Integer.parseInt(input.split(" ")[1]);
+                    lines.add("Nice! I've marked this task as done:");
+                    lines.add("  " + tasks.get(taskNumber - 1).markAsDone());
+                    break;
                 }
-            } else if (markMatcher.matches()) {
-                int taskNumber = Integer.parseInt(markMatcher.group(1));
-                lines.add("Nice! I've marked this task as done:");
-                lines.add("  " + tasks.get(taskNumber - 1).markAsDone());
-            } else if (unmarkMatcher.matches()) {
-                int taskNumber = Integer.parseInt(unmarkMatcher.group(1));
-                lines.add("OK, I've marked this task as not done yet:");
-                lines.add("  " + tasks.get(taskNumber - 1).markAsUndone());
-            } else {
-                tasks.add(new Task(input));
-                lines.add("added: " + input);
+
+                case "unmark": {
+                    int taskNumber = Integer.parseInt(input.split(" ")[1]);
+                    lines.add("OK, I've marked this task as not done yet:");
+                    lines.add("  " + tasks.get(taskNumber - 1).markAsUndone());
+                    break;
+                }
+
+                case "todo":
+                    addTask(new Todo(input), tasks, lines);
+                    break;
+
+                case "deadline":
+                    addTask(new Deadline(input), tasks, lines);
+                    break;
+
+                case "event":
+                    addTask(new Event(input), tasks, lines);
+                    break;
             }
             printBox(lines.toArray(new String[0]));
         }
-
-        printBox("Bye. Hope to see you again soon!");
         scanner.close();
+    }
+
+    private static void addTask(Task task, List<Task> tasks, List<String> lines) {
+        tasks.add(task);
+        lines.add("Got it. I've added this task:");
+        lines.add("  " + task.toString());
+        if (tasks.size() == 1) {
+            lines.add("Now you have " + tasks.size() + " task in the list.");
+        } else {
+            lines.add("Now you have " + tasks.size() + " tasks in the list.");
+        }
     }
 
     private static void printBox(String... messages) {
