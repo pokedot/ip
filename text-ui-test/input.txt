@@ -1,0 +1,9 @@
+todo borrow pen
+deadline go home /by Monday
+event meet friend /from Tue 1pm /to Wed 1pm
+list
+mark 2
+mark 3
+unmark 2
+list
+bye
