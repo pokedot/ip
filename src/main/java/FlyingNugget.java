@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class FlyingNugget {
     public static void main(String[] args) {
         String intro =  """
@@ -11,12 +13,29 @@ public class FlyingNugget {
             """;
 
         String name = "FlyingNugget";
+        String line = "\t____________________________________________________________";
+        Scanner scanner = new Scanner(System.in);
+
         System.out.println(intro);
-        System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm " + name);
-        System.out.println("What can I do for you?");
-        System.out.println("____________________________________________________________");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("____________________________________________________________");
+        System.out.println(line);
+        System.out.println("\tHello! I'm " + name);
+        System.out.println("\tWhat can I do for you?");
+        System.out.println(line);
+
+        while (true) {
+            String input = scanner.nextLine();
+            if (input.equals("bye")) {
+                break;
+            } else {
+                System.out.println(line);
+                System.out.println("\t" + input);
+                System.out.println(line);
+            }
+        }
+
+        System.out.println(line);
+        System.out.println("\tBye. Hope to see you again soon!");
+        System.out.println(line);
+        scanner.close();
     }
 }
