@@ -22,9 +22,8 @@ public class FlyingNugget {
      * and displaying the current list of tasks.
      *
      * @param args (not used)
-     * @throws UnknownActionException if the user enters an unknown action
      */
-    public static void main(String[] args) throws UnknownActionException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
         boolean isRunning = true;
@@ -33,31 +32,31 @@ public class FlyingNugget {
                 "What can FlyingNugget do for LittleNuggy?");
 
         while (isRunning) {
-            String input = scanner.nextLine().strip();
-            String action = input.split(" ")[0];
+            String input = scanner.nextLine();
+            Action action = Action.findAction(input);
             List<String> lines = new ArrayList<>();
 
             switch (action) {
-                case "bye":
+                case BYE:
                     isRunning = false;
                     lines.add("Bye! See LittleNuggy soon!");
                     break;
 
-                case "list":
+                case LIST:
                     lines.add("Ok~! Here are LittleNuggy's tasks!");
                     for (int i = 0; i < tasks.size(); i++) {
                         lines.add((i + 1) + "." + tasks.get(i));
                     }
                     break;
 
-                case "mark":
+                case MARK:
                     try {
                         int taskNumber = Integer.parseInt(input.split(" ")[1]);
                         String taskInfo = tasks.get(taskNumber - 1).markAsDone();
                         lines.add("Sugoi desu! LittleNuggy finished LittleNuggy's task!");
                         lines.add("  " + taskInfo);
                     } catch (NumberFormatException e) {
-                        lines.add("FlyingNugget does have LittleNuggy's task number!");
+                        lines.add("FlyingNugget does not have LittleNuggy's task number!");
                         lines.add("(Ensure your mark is of the following format: \"mark [number]\".)");
                     } catch (IndexOutOfBoundsException e) {
                         lines.add("FlyingNugget does not see this task number in LittleNuggy's list!");
@@ -66,14 +65,14 @@ public class FlyingNugget {
                     break;
 
 
-                case "unmark":
+                case UNMARK:
                     try {
                         int taskNumber = Integer.parseInt(input.split(" ")[1]);
                         String taskInfo = tasks.get(taskNumber - 1).markAsUndone();
                         lines.add("Nani? LittleNuggy lied to FlyingNugget?");
                         lines.add("  " + taskInfo);
                     } catch (NumberFormatException e) {
-                        lines.add("FlyingNugget does have LittleNuggy's task number!");
+                        lines.add("FlyingNugget does not have LittleNuggy's task number!");
                         lines.add("(Ensure your unmark is of the following format: \"unmark [number]\".)");
                     } catch (IndexOutOfBoundsException e) {
                         lines.add("FlyingNugget does not see this task number on LittleNuggy's list!");
@@ -81,7 +80,7 @@ public class FlyingNugget {
                     }
                     break;
 
-                case "todo":
+                case TODO:
                     try {
                         addTask(new Todo(input), tasks, lines);
                     } catch (MissingTaskException e) {
@@ -90,7 +89,7 @@ public class FlyingNugget {
                     }
                     break;
 
-                case "deadline":
+                case DEADLINE:
                     try {
                         addTask(new Deadline(input), tasks, lines);
                     } catch (MissingTaskException e) {
@@ -99,7 +98,7 @@ public class FlyingNugget {
                     }
                     break;
 
-                case "event":
+                case EVENT:
                     try {
                         addTask(new Event(input), tasks, lines);
                     } catch (MissingTaskException e) {
@@ -108,7 +107,7 @@ public class FlyingNugget {
                     }
                     break;
 
-                case "delete":
+                case DELETE:
                     try {
                         int taskNumber = Integer.parseInt(input.split(" ")[1]);
                         deleteTask(taskNumber, tasks, lines);
@@ -121,12 +120,8 @@ public class FlyingNugget {
                     }
                     break;
 
-                default:
-                    try {
-                        throw new UnknownActionException();
-                    } catch (UnknownActionException e) {
-                        lines.add("FlyingNugget has never heard that before!");
-                    }
+                case UNKNOWN:
+                    lines.add("FlyingNugget has never heard that before!");
             }
             printBox(lines.toArray(new String[0]));
         }
