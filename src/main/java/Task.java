@@ -2,7 +2,7 @@
  * This is the base class for Todo, Deadline, and Event.
  */
 public class Task {
-    private boolean done;
+    private boolean isDone;
     private final String item;
 
     /**
@@ -12,8 +12,28 @@ public class Task {
      * @param item the description of the task
      */
     Task(String item) {
-        this.done = false;
+        this.isDone = false;
         this.item = item;
+    }
+
+    Task(boolean isDone, String item) {
+        this.isDone = isDone;
+        this.item = item;
+    }
+
+    public static Task read(String serializedTask) {
+        String[] parts = serializedTask.split("\\|");
+        String taskType = parts[0];
+        Task task = null;
+        switch (taskType) {
+        case "T":
+            task = new Todo(Boolean.parseBoolean(parts[1]), parts[2]);
+        case "D":
+            task = new Deadline(Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
+        case "E":
+            task = new Event(Boolean.parseBoolean(parts[1]), parts[2], parts[3], parts[4]);
+        }
+        return task;
     }
 
     /**
@@ -21,8 +41,8 @@ public class Task {
      *
      * @return true if the task is done, false otherwise
      */
-    public boolean getDone() {
-        return this.done;
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     /**
@@ -40,7 +60,7 @@ public class Task {
      * @return the string representation of the task after marking it as done
      */
     public String markAsDone() {
-        this.done = true;
+        this.isDone = true;
         return this.toString();
     }
 
@@ -50,8 +70,12 @@ public class Task {
      * @return the string representation of the task after marking it as undone
      */
     public String markAsUndone() {
-        this.done = false;
+        this.isDone = false;
         return this.toString();
+    }
+
+    public String serialize() {
+        return this.isDone + " | " + this.item;
     }
 
     /**
@@ -62,6 +86,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return (done ? "[X] " : "[ ] ") + item;
+        return (isDone ? "[X] " : "[ ] ") + item;
     }
 }
