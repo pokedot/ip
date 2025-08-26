@@ -1,3 +1,5 @@
+package flyingnugget.task;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +15,7 @@ public class Todo extends Task {
      * @param description the user input containing the "todo" keyword and task description
      * @throws MissingTaskException if no task description is provided
      */
-    Todo(String description) throws MissingTaskException {
+    public Todo(String description) throws MissingTaskException {
         super(parse(description));
     }
 

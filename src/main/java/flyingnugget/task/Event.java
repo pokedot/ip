@@ -1,3 +1,5 @@
+package flyingnugget.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -18,7 +20,7 @@ public class Event extends Task {
      * @param description the user input containing the "event" keyword, task description, start date, and end date
      * @throws MissingTaskException if the task description, the start date, and/or the end date is missing
      */
-    Event(String description) throws MissingTaskException, DateTimeParseException {
+    public Event(String description) throws MissingTaskException, DateTimeParseException {
         super(parse(description)[0]);
         this.start = LocalDate.parse(parse(description)[1]);
         this.end = LocalDate.parse(parse(description)[2]);

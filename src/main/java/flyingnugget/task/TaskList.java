@@ -1,3 +1,7 @@
+package flyingnugget.task;
+
+import flyingnugget.Storage;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +10,7 @@ public class TaskList {
     private final List<Task> tasks;
     private final Storage storage;
 
-    TaskList(Storage storage) {
+    public TaskList(Storage storage) {
         this.tasks = new ArrayList<>();
         this.storage = storage;
     }

@@ -1,3 +1,5 @@
+package flyingnugget;
+
 public class Ui {
     private static final String INTRO = """
          _____ _       _             _   _                        _

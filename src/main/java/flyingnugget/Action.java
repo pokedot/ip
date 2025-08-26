@@ -1,3 +1,5 @@
+package flyingnugget;
+
 public enum Action {
     BYE,
     LIST,

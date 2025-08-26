@@ -1,2 +1,5 @@
 E|true|go to a party|2025-05-01|2025-05-02
-T|false|test
+D|false|buy groceries|2020-04-15
+E|false|wedding banquet|2025-09-09|2025-09-10
+T|false|dance party
+T|false|eat vegetables later

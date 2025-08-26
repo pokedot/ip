@@ -1,3 +1,5 @@
+package flyingnugget.task;
+
 /** Represents a Task which tracks an item and its completion state.
  * This is the base class for Todo, Deadline, and Event.
  */

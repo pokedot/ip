@@ -1,3 +1,7 @@
+package flyingnugget;
+
+import flyingnugget.task.TaskList;
+
 import java.util.List;
 import java.util.Scanner;
 

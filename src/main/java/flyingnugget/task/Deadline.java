@@ -1,3 +1,5 @@
+package flyingnugget.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -17,7 +19,7 @@ public class Deadline extends Task {
      * @param description the user input containing the "deadline" keyword, task description, and due date
      * @throws MissingTaskException if the task description and/or the due date is missing
      */
-    Deadline(String description) throws MissingTaskException, DateTimeParseException {
+    public Deadline(String description) throws MissingTaskException, DateTimeParseException {
         super(parse(description)[0]);
         this.deadline = LocalDate.parse(parse(description)[1]);
     }
