@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,8 +28,15 @@ public class FlyingNugget {
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
         boolean isRunning = true;
+        List<Task> tasks = new ArrayList<>();
+        Storage storage = new Storage("./data/FlyingNugget.txt");
+        try {
+            tasks = storage.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         System.out.println(INTRO);
         printBox("Yaho-! FlyingNugget's FlyingNugget!",
                 "What can FlyingNugget do for LittleNuggy?");
@@ -55,12 +63,15 @@ public class FlyingNugget {
                     String taskInfo = tasks.get(taskNumber - 1).markAsDone();
                     lines.add("Sugoi desu! LittleNuggy finished LittleNuggy's task!");
                     lines.add("  " + taskInfo);
+                    storage.save(tasks);
                 } catch (NumberFormatException e) {
                     lines.add("FlyingNugget does not have LittleNuggy's task number!");
                     lines.add("(Ensure your mark is of the following format: \"mark [number]\".)");
                 } catch (IndexOutOfBoundsException e) {
                     lines.add("FlyingNugget does not see this task number in LittleNuggy's list!");
                     lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
                 break;
             case UNMARK:
@@ -69,48 +80,63 @@ public class FlyingNugget {
                     String taskInfo = tasks.get(taskNumber - 1).markAsUndone();
                     lines.add("Nani? LittleNuggy lied to FlyingNugget?");
                     lines.add("  " + taskInfo);
+                    storage.save(tasks);
                 } catch (NumberFormatException e) {
                     lines.add("FlyingNugget does not have LittleNuggy's task number!");
                     lines.add("(Ensure your unmark is of the following format: \"unmark [number]\".)");
                 } catch (IndexOutOfBoundsException e) {
                     lines.add("FlyingNugget does not see this task number on LittleNuggy's list!");
                     lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
                 break;
             case TODO:
                 try {
                     addTask(new Todo(input), tasks, lines);
+                    storage.save(tasks);
                 } catch (MissingTaskException e) {
                     lines.add("Where is LittleNuggy's todo?");
                     lines.add("(Ensure your todo is of the following format: \"todo [task]\".)");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
                 break;
             case DEADLINE:
                 try {
                     addTask(new Deadline(input), tasks, lines);
+                    storage.save(tasks);
                 } catch (MissingTaskException e) {
                     lines.add("When is LittleNuggy's deadline?");
                     lines.add("(Ensure your deadline is of the following format: \"deadline [task] /by [dueDate]\".)");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
                 break;
             case EVENT:
                 try {
                     addTask(new Event(input), tasks, lines);
+                    storage.save(tasks);
                 } catch (MissingTaskException e) {
                     lines.add("When is LittleNuggy's event?");
                     lines.add("(Ensure your event is of the following format: \"event [task] /from [start] /to [end]\".)");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
                 break;
             case DELETE:
                 try {
                     int taskNumber = Integer.parseInt(input.split(" ")[1]);
                     deleteTask(taskNumber, tasks, lines);
+                    storage.save(tasks);
                 } catch (NumberFormatException e) {
                     lines.add("FlyingNugget does have LittleNuggy's task number!");
                     lines.add("(Ensure your delete is of the following format: \"delete [number]\".)");
                 } catch (IndexOutOfBoundsException e) {
                     lines.add("FlyingNugget does not see this task number on LittleNuggy's list!");
                     lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
                 break;
             case UNKNOWN:

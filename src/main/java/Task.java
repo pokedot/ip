@@ -28,10 +28,13 @@ public class Task {
         switch (taskType) {
         case "T":
             task = new Todo(Boolean.parseBoolean(parts[1]), parts[2]);
+            break;
         case "D":
             task = new Deadline(Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
+            break;
         case "E":
             task = new Event(Boolean.parseBoolean(parts[1]), parts[2], parts[3], parts[4]);
+            break;
         }
         return task;
     }

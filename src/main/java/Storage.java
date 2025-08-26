@@ -18,22 +18,24 @@ public class Storage {
         File file = new File(filePath);
         file.getParentFile().mkdirs();
         file.createNewFile();
-
-        BufferedReader br = new BufferedReader(new FileReader(file));
         List<Task> tasks = new ArrayList<>();
-        String line;
-        while ((line = br.readLine()) != null) {
-            Task task = Task.read(line);
-            tasks.add(task);
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                Task task = Task.read(line);
+                tasks.add(task);
+            }
         }
         return tasks;
     }
 
     public void save(List<Task> tasks) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
-        for (Task task : tasks) {
-            bw.write(task.serialize());
-            bw.newLine();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            for (Task task : tasks) {
+                bw.write(task.serialize());
+                bw.newLine();
+            }
         }
     }
 }
