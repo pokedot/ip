@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -109,6 +110,9 @@ public class FlyingNugget {
                 } catch (MissingTaskException e) {
                     lines.add("When is LittleNuggy's deadline?");
                     lines.add("(Ensure your deadline is of the following format: \"deadline [task] /by [dueDate]\".)");
+                } catch (DateTimeParseException e) {
+                    lines.add("FlyingNugget needs a valid deadline to help LittleNuggy!");
+                    lines.add("(Ensure your deadline is in the following format: YYYY-MM-DD.)");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -120,6 +124,9 @@ public class FlyingNugget {
                 } catch (MissingTaskException e) {
                     lines.add("When is LittleNuggy's event?");
                     lines.add("(Ensure your event is of the following format: \"event [task] /from [start] /to [end]\".)");
+                } catch (DateTimeParseException e) {
+                    lines.add("FlyingNugget needs a valid start and end date to help LittleNuggy!");
+                    lines.add("(Ensure your start and end dates are in the following format: YYYY-MM-DD.)");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

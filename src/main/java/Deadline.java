@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -6,7 +9,7 @@ import java.util.regex.Pattern;
  * The description is parsed from the user input.
  */
 public class Deadline extends Task {
-    private final String deadline;
+    private final LocalDate deadline;
 
     /**
      * Creates a new Deadline task from the given description.
@@ -14,14 +17,14 @@ public class Deadline extends Task {
      * @param description the user input containing the "deadline" keyword, task description, and due date
      * @throws MissingTaskException if the task description and/or the due date is missing
      */
-    Deadline(String description) throws MissingTaskException {
+    Deadline(String description) throws MissingTaskException, DateTimeParseException {
         super(parse(description)[0]);
-        this.deadline = parse(description)[1];
+        this.deadline = LocalDate.parse(parse(description)[1]);
     }
 
     Deadline(boolean isDone, String item, String deadline) {
         super(isDone, item);
-        this.deadline = deadline;
+        this.deadline = LocalDate.parse(deadline);
     }
 
     /**
@@ -45,7 +48,10 @@ public class Deadline extends Task {
 
     @Override
     public String serialize() {
-        return "D|" + this.getIsDone() + "|" + this.getItem() + "|" + this.deadline;
+        return "D|"
+                + this.getIsDone() + "|"
+                + this.getItem()
+                + "|" + this.deadline;
     }
 
     /**
@@ -55,6 +61,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + (this.getIsDone() ? "[X] " : "[ ] ") + this.getItem() + " (by: " + this.deadline + ")";
+        return "[D]"
+                + (this.getIsDone() ? "[X] " : "[ ] ")
+                + this.getItem() + " (by: "
+                + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
