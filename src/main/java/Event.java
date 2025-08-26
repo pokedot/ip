@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -6,8 +9,8 @@ import java.util.regex.Pattern;
  * The description is parsed from the user input.
  */
 public class Event extends Task {
-    private final String start;
-    private final String end;
+    private final LocalDate start;
+    private final LocalDate end;
 
     /**
      * Creates a new Event task from the given description.
@@ -15,16 +18,16 @@ public class Event extends Task {
      * @param description the user input containing the "event" keyword, task description, start date, and end date
      * @throws MissingTaskException if the task description, the start date, and/or the end date is missing
      */
-    Event(String description) throws MissingTaskException {
+    Event(String description) throws MissingTaskException, DateTimeParseException {
         super(parse(description)[0]);
-        this.start = parse(description)[1];
-        this.end = parse(description)[2];
+        this.start = LocalDate.parse(parse(description)[1]);
+        this.end = LocalDate.parse(parse(description)[2]);
     }
 
     Event(boolean isDone, String item, String start, String end) {
         super(isDone, item);
-        this.start = start;
-        this.end = end;
+        this.start = LocalDate.parse(start);
+        this.end = LocalDate.parse(end);
     }
 
     /**
@@ -49,7 +52,11 @@ public class Event extends Task {
 
     @Override
     public String serialize() {
-        return "E|" + this.getIsDone() + "|" + this.getItem() + "|" + this.start + "|" + this.end;
+        return "E|"
+                + this.getIsDone() + "|"
+                + this.getItem() + "|"
+                + this.start + "|"
+                + this.end;
     }
 
     /**
@@ -59,6 +66,10 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + (this.getIsDone() ? "[X] " : "[ ] ") + this.getItem() + " (from: " + this.start + " to: " + this.end + ")";
+        return "[E]"
+                + (this.getIsDone() ? "[X] " : "[ ] ")
+                + this.getItem() + " (from: "
+                + this.start.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to: "
+                + this.end.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
