@@ -1,3 +1,2 @@
-T|false|go to the beach
-D|false|eat lunch|2020-03-14
-E|false|go to a party|2025-05-01|2025-05-02
+E|true|go to a party|2025-05-01|2025-05-02
+T|false|test
