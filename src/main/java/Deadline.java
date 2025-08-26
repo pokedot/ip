@@ -19,6 +19,11 @@ public class Deadline extends Task {
         this.deadline = parse(description)[1];
     }
 
+    Deadline(boolean isDone, String item, String deadline) {
+        super(isDone, item);
+        this.deadline = deadline;
+    }
+
     /**
      * Extracts the task description and due date from the user input.
      *
@@ -38,6 +43,11 @@ public class Deadline extends Task {
         }
     }
 
+    @Override
+    public String serialize() {
+        return "D|" + this.getIsDone() + "|" + this.getItem() + "|" + this.deadline;
+    }
+
     /**
      * Returns a string representation of the Deadline task.
      *
@@ -45,6 +55,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + (this.getDone() ? "[X] " : "[ ] ") + this.getItem() + " (by: " + this.deadline + ")";
+        return "[D]" + (this.getIsDone() ? "[X] " : "[ ] ") + this.getItem() + " (by: " + this.deadline + ")";
     }
 }

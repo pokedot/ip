@@ -21,6 +21,12 @@ public class Event extends Task {
         this.end = parse(description)[2];
     }
 
+    Event(boolean isDone, String item, String start, String end) {
+        super(isDone, item);
+        this.start = start;
+        this.end = end;
+    }
+
     /**
      * Extracts the task description, start date, and end date from the user input.
      *
@@ -41,6 +47,11 @@ public class Event extends Task {
         }
     }
 
+    @Override
+    public String serialize() {
+        return "E|" + this.getIsDone() + "|" + this.getItem() + "|" + this.start + "|" + this.end;
+    }
+
     /**
      * Returns a string representation of the Event task.
      *
@@ -48,6 +59,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + (this.getDone() ? "[X] " : "[ ] ") + this.getItem() + " (from: " + this.start + " to: " + this.end + ")";
+        return "[E]" + (this.getIsDone() ? "[X] " : "[ ] ") + this.getItem() + " (from: " + this.start + " to: " + this.end + ")";
     }
 }

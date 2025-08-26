@@ -17,6 +17,10 @@ public class Todo extends Task {
         super(parse(description));
     }
 
+    Todo(boolean isDone, String item) {
+        super(isDone, item);
+    }
+
     /**
      * Extracts the task description from the user input.
      *
@@ -34,6 +38,11 @@ public class Todo extends Task {
         }
     }
 
+    @Override
+    public String serialize() {
+        return "T|" + this.getIsDone() + "|" + this.getItem();
+    }
+
     /**
      * Returns a string representation of the Todo task.
      *
@@ -41,7 +50,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + (this.getDone() ? "[X] " : "[ ] ") + this.getItem();
+        return "[T]" + (this.getIsDone() ? "[X] " : "[ ] ") + this.getItem();
     }
 
 }
