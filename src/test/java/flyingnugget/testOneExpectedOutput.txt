@@ -1,0 +1,58 @@
+ _____ _       _             _   _                        _
+|  ___| |_   _(_)_ __   __ _| \ | |_   _  __ _  __ _  ___| |_
+| |_  | | | | | | '_ \ / _` |  \| | | | |/ _` |/ _` |/ _ \ __|
+|  _| | | |_| | | | | | (_| | |\  | |_| | (_| | (_| |  __/ |_
+|_|   |_|\__, |_|_| |_|\__, |_| \_|\__,_|\__, |\__, |\___|\__|
+         |___/         |___/             |___/ |___/
+
+    ____________________________________________________________
+    Yaho-! FlyingNugget's FlyingNugget!
+    What can FlyingNugget do for LittleNuggy?
+    ____________________________________________________________
+    ____________________________________________________________
+    Ok~! Here are LittleNuggy's tasks!
+    ____________________________________________________________
+    ____________________________________________________________
+    Ok~! FlyingNugget will help LittleNuggy add this task!
+      [T][ ] eat dinner
+    Now LittleNuggy has 1 task on LittleNuggy's list!
+    ____________________________________________________________
+    ____________________________________________________________
+    Ok~! FlyingNugget will help LittleNuggy add this task!
+      [D][ ] buy groceries (by: Jan 1 2025)
+    Wow! LittleNuggy is getting busy!
+    Now LittleNuggy has 2 tasks on LittleNuggy's list!
+    ____________________________________________________________
+    ____________________________________________________________
+    Ok~! FlyingNugget will help LittleNuggy add this task!
+      [E][ ] attend wedding (from: Feb 12 2025 to: Feb 13 2025)
+    Wow! LittleNuggy is getting busy!
+    Now LittleNuggy has 3 tasks on LittleNuggy's list!
+    ____________________________________________________________
+    ____________________________________________________________
+    Ok~! Here are LittleNuggy's tasks!
+    1.[T][ ] eat dinner
+    2.[D][ ] buy groceries (by: Jan 1 2025)
+    3.[E][ ] attend wedding (from: Feb 12 2025 to: Feb 13 2025)
+    ____________________________________________________________
+    ____________________________________________________________
+    Sugoi desu! LittleNuggy finished LittleNuggy's task!
+      [D][X] buy groceries (by: Jan 1 2025)
+    ____________________________________________________________
+    ____________________________________________________________
+    Ok~! FlyingNugget will remove this task for LittleNuggy!
+      [E][ ] attend wedding (from: Feb 12 2025 to: Feb 13 2025)
+    Now LittleNuggy has 2 tasks on LittleNuggy's list!
+    ____________________________________________________________
+    ____________________________________________________________
+    Nani? LittleNuggy lied to FlyingNugget?
+      [D][ ] buy groceries (by: Jan 1 2025)
+    ____________________________________________________________
+    ____________________________________________________________
+    Ok~! Here are LittleNuggy's tasks!
+    1.[T][ ] eat dinner
+    2.[D][ ] buy groceries (by: Jan 1 2025)
+    ____________________________________________________________
+    ____________________________________________________________
+    Bye! See LittleNuggy soon!
+    ____________________________________________________________

@@ -1,0 +1,10 @@
+list
+todo eat dinner
+deadline buy groceries /by 2025-01-01
+event attend wedding /from 2025-02-12 /to 2025-02-13
+list
+mark 2
+delete 3
+unmark 2
+list
+bye

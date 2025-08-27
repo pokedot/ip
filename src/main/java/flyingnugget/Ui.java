@@ -33,7 +33,7 @@ public class Ui {
     private static void printBox(String... messages) {
         System.out.println(LINE);
         for (String msg : messages) {
-            System.out.println("\t" + msg);
+            System.out.println("    " + msg);
         }
         System.out.println(LINE);
     }

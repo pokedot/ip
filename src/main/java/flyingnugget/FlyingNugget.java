@@ -13,12 +13,10 @@ import java.util.Scanner;
 public class FlyingNugget {
 
     /**
-     * The main entry point for the chatbot.
-     * Initializes the application and starts the main loop.
-     *
-     * @param args (not used)
+     * Runs the FlyingNugget chatbot.
+     * Initializes storage and loads tasks, then processes user commands until "bye" is entered.
      */
-    public static void main(String[] args) {
+    public void run() {
         Scanner scanner = new Scanner(System.in);
         boolean isRunning = true;
         Storage storage = new Storage("./data/FlyingNugget.txt");
@@ -44,5 +42,15 @@ public class FlyingNugget {
             }
         }
         scanner.close();
+    }
+
+    /**
+     * The main entry point for the chatbot.
+     * Initializes the application and starts the main loop.
+     *
+     * @param args (not used)
+     */
+    public static void main(String[] args) {
+        new FlyingNugget().run();
     }
 }
