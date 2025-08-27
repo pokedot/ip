@@ -101,6 +101,12 @@ public class TaskList {
         return this.getTask(taskNumber).markAsUndone();
     }
 
+    public List<Task> find(String keyword) {
+        return this.tasks.stream()
+                .filter(x -> x.getItem().contains(keyword))
+                .toList();
+    }
+
     /**
      * Returns the current size of the TaskList.
      *

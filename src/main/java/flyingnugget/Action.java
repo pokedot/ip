@@ -9,6 +9,7 @@ public enum Action {
     DEADLINE,
     EVENT,
     DELETE,
+    FIND,
     UNKNOWN;
 
     /**

@@ -36,6 +36,10 @@ public class Parser {
             for (int i = 0; i < tasks.size(); i++) {
                 lines.add((i + 1) + "." + tasks.get(i));
             }
+            if (tasks.isEmpty()) {
+                lines.add("  (Nothing to see here.)");
+                lines.add("Seems like LittleNuggy is very free right now!");
+            }
             break;
         case MARK:
             try {
@@ -123,6 +127,23 @@ public class Parser {
                 lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+            break;
+        case FIND:
+            try {
+                String keyword = input.split(" ", 2)[1];
+                lines.add("Ok~! Here are all of LittleNuggy's related tasks!");
+                List<Task> filteredTasks = taskList.find(keyword);
+                for (Task filteredTask : filteredTasks) {
+                    lines.add("  " + filteredTask);
+                }
+                if (filteredTasks.isEmpty()) {
+                    lines.add("  (Nothing to see here.)");
+                    lines.add("Seems like LittleNuggy has no related tasks with that keyword!");
+                }
+            } catch (IndexOutOfBoundsException e) {
+                lines.add("FlyingNugget does not have a keyword to search with!");
+                lines.add("(Ensure your find is of the following format: \"find [keyword(s)]\".)");
             }
             break;
         case UNKNOWN:
