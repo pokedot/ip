@@ -26,6 +26,14 @@ public class Event extends Task {
         this.end = LocalDate.parse(parse(description)[2]);
     }
 
+    /**
+     * Creates an Event task from its serialized string form
+     *
+     * @param isDone the state of completion of the event
+     * @param item the event item
+     * @param start the event start date
+     * @param end the event end date
+     */
     Event(boolean isDone, String item, String start, String end) {
         super(isDone, item);
         this.start = LocalDate.parse(start);
@@ -52,6 +60,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Converts the event to a serialized string to be saved to a text file for future retrieval.
+     *
+     * @return a string that corresponds to the event
+     */
     @Override
     public String serialize() {
         return "E|"

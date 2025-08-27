@@ -18,11 +18,24 @@ public class Task {
         this.item = item;
     }
 
+    /**
+     * Creates a new Task with its completion state and item.
+     *
+     * @param isDone the completion state of the task
+     * @param item the description of the task
+     */
     Task(boolean isDone, String item) {
         this.isDone = isDone;
         this.item = item;
     }
 
+    /**
+     * Takes in the serialized form of a task and returns a
+     * todo, deadline, or event with its respective attributes based on its task type.
+     *
+     * @param serializedTask the seralized form of a task
+     * @return Task which corresponds to its serialized form
+     */
     public static Task read(String serializedTask) {
         String[] parts = serializedTask.split("\\|");
         String taskType = parts[0];

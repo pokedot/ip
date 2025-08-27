@@ -19,6 +19,12 @@ public class Todo extends Task {
         super(parse(description));
     }
 
+    /**
+     * Creates a Todo task from its serialized string form
+     *
+     * @param isDone the state of completion of the todo
+     * @param item the todo item
+     */
     Todo(boolean isDone, String item) {
         super(isDone, item);
     }
@@ -40,6 +46,11 @@ public class Todo extends Task {
         }
     }
 
+    /**
+     * Converts the todo to a serialized string to be saved to a text file for future retrieval.
+     *
+     * @return a string that corresponds to the todo
+     */
     @Override
     public String serialize() {
         return "T|" + this.getIsDone() + "|" + this.getItem();

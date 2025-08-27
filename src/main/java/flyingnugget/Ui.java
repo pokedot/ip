@@ -1,5 +1,8 @@
 package flyingnugget;
 
+/**
+ * Handles all user interface outputs for the FlyingNugget chatbot.
+ */
 public class Ui {
     private static final String INTRO = """
          _____ _       _             _   _                        _
@@ -11,6 +14,9 @@ public class Ui {
         """;
     private static final String LINE = "\t____________________________________________________________";
 
+    /**
+     * Prints the introduction message when the chatbot starts.
+     */
     public static void showIntro() {
         System.out.println(INTRO);
         printBox("Yaho-! FlyingNugget's FlyingNugget!",

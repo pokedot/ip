@@ -24,6 +24,13 @@ public class Deadline extends Task {
         this.deadline = LocalDate.parse(parse(description)[1]);
     }
 
+    /**
+     * Creates a Deadline task from its serialized string form
+     *
+     * @param isDone the state of completion of the deadline
+     * @param item the deadline item
+     * @param deadline the deadline date
+     */
     Deadline(boolean isDone, String item, String deadline) {
         super(isDone, item);
         this.deadline = LocalDate.parse(deadline);
@@ -48,6 +55,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Converts the deadline to a serialized string to be saved to a text file for future retrieval.
+     *
+     * @return a string that corresponds to the deadline
+     */
     @Override
     public String serialize() {
         return "D|"
