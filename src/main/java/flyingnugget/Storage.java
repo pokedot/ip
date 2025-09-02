@@ -1,7 +1,5 @@
 package flyingnugget;
 
-import flyingnugget.task.Task;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,8 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import flyingnugget.task.Task;
+
 /**
- * Handles the saving and loading of task lists to and from a specified file path.
+ * Handles saving and loading of task lists to and from a specified file path.
  */
 public class Storage {
     private final String filePath;

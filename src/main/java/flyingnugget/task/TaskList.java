@@ -1,13 +1,13 @@
 package flyingnugget.task;
 
-import flyingnugget.Storage;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import flyingnugget.Storage;
+
 /**
- * Represents a list of Task objects in the FlyingNugget application.
+ * Represents a list of {@code Task} objects in the FlyingNugget application.
  * Provides operations to add, delete, mark, unmark and get tasks.
  */
 public class TaskList {
@@ -16,7 +16,7 @@ public class TaskList {
 
 
     /**
-     * Creates a new TaskList and tracks its corresponding storage path.
+     * Creates a new {@code TaskList} and tracks its corresponding storage path.
      *
      * @param storage the file path for the task list to be saved or loaded
      */
@@ -26,7 +26,7 @@ public class TaskList {
     }
 
     /**
-     * Loads the tasks from the storage and replaces the existing tasks in the TaskList.
+     * Loads the tasks from the storage and replaces the existing tasks in the {@code TaskList}.
      *
      * @throws IOException if an I/O error occurs while loading from storage
      */
@@ -46,7 +46,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a Task to the TaskList.
+     * Adds a {@code Task} to the {@code TaskList}.
      *
      * @param task the task to be added
      */
@@ -55,7 +55,7 @@ public class TaskList {
     }
 
     /**
-     * Removes a Task from the TaskList using 1-indexing.
+     * Removes a {@code Task} from the {@code TaskList} using 1-indexing.
      *
      * @param taskNumber the task number to be deleted
      */
@@ -64,7 +64,7 @@ public class TaskList {
     }
 
     /**
-     * Gets a Task from the TaskList using 1-indexing.
+     * Gets a {@code Task} from the {@code TaskList} using 1-indexing.
      *
      * @param taskNumber the task number to be retrieved
      */
@@ -73,7 +73,7 @@ public class TaskList {
     }
 
     /**
-     * Returns all tasks currently in the TaskList.
+     * Returns all tasks currently in the {@code TaskList}.
      *
      * @return the list of tasks
      */
@@ -82,7 +82,7 @@ public class TaskList {
     }
 
     /**
-     * Marks the corresponding task as done using 1-indexing.
+     * Marks the corresponding {@code Task} as done using 1-indexing.
      *
      * @param taskNumber the task number to be marked
      * @return the string representation of the marked task
@@ -92,7 +92,7 @@ public class TaskList {
     }
 
     /**
-     * Marks the corresponding task as undone using 1-indexing.
+     * Marks the corresponding {@code Task} as undone using 1-indexing.
      *
      * @param taskNumber the task number to be unmarked
      * @return the string representation of the unmarked task
@@ -101,6 +101,12 @@ public class TaskList {
         return this.getTask(taskNumber).markAsUndone();
     }
 
+    /**
+     * Searches the {@code TaskList} for all tasks that match a given keyword or keywords.
+     *
+     * @param keyword the string to search for in the {@code TaskList}
+     * @return the list of tasks that match the given keyword
+     */
     public List<Task> find(String keyword) {
         return this.tasks.stream()
                 .filter(x -> x.getItem().contains(keyword))
@@ -108,7 +114,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the current size of the TaskList.
+     * Returns the current size of the {@code TaskList}.
      *
      * @return the number of tasks
      */

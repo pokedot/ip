@@ -4,13 +4,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Represents a Todo task, which is a type of Task without a specific deadline or event time.
- * The description is parsed from the user input.
+ * Represents a {@code Todo} task, a type of {@code Task}
+ * that does not have a deadline or start/ end dates.
+ * <p>
+ * The task description is parsed from user input.
+ * </p>
  */
 public class Todo extends Task {
 
     /**
-     * Creates a new Todo task from the given description.
+     * Creates a new {@code Todo} task from the given description.
      *
      * @param description the user input containing the "todo" keyword and task description
      * @throws MissingTaskException if no task description is provided
@@ -20,7 +23,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Creates a Todo task from its serialized string form
+     * Creates a {@code Todo} task from its serialized string form
      *
      * @param isDone the state of completion of the todo
      * @param item the todo item
@@ -30,7 +33,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Extracts the task description from the user input.
+     * Extracts the {@code Todo} description from the user input.
      *
      * @param description the raw input string
      * @return the parsed task description
@@ -47,9 +50,9 @@ public class Todo extends Task {
     }
 
     /**
-     * Converts the todo to a serialized string to be saved to a text file for future retrieval.
+     * Converts the {@code Todo} to a serialized string to be saved to a text file for future retrieval.
      *
-     * @return a string that corresponds to the todo
+     * @return a string that corresponds to the {@code Todo}
      */
     @Override
     public String serialize() {
@@ -57,7 +60,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns a string representation of the Todo task.
+     * Returns a string representation of the {@code Todo} task.
      *
      * @return a string showing task type, completion status, and task description
      */
