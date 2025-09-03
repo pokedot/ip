@@ -1,4 +1,4 @@
-package flyingnugget;
+package flyingnugget.ui;
 
 /**
  * Handles all user interface outputs for the {@code FlyingNugget} chatbot.

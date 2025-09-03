@@ -1,4 +1,4 @@
-package flyingnugget;
+package flyingnugget.storage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,7 +17,7 @@ import flyingnugget.task.Task;
 public class Storage {
     private final String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 

@@ -1,4 +1,4 @@
-package flyingnugget;
+package flyingnugget.parser;
 
 /**
  * Represents the different types of commands or actions

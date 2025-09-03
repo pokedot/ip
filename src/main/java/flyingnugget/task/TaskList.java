@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import flyingnugget.Storage;
+import flyingnugget.storage.Storage;
 
 /**
  * Represents a list of {@code Task} objects in the FlyingNugget application.
