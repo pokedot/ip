@@ -1,4 +1,4 @@
-package flyingnugget;
+package flyingnugget.parser;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
