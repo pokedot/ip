@@ -3,6 +3,7 @@ package flyingnugget;
 import java.util.List;
 import java.util.Scanner;
 
+import flyingnugget.parser.Action;
 import flyingnugget.parser.Parser;
 import flyingnugget.storage.Storage;
 import flyingnugget.task.TaskList;
@@ -86,7 +87,7 @@ public class FlyingNugget {
     public String getResponse(String input) {
         List<String> messages = Parser.parseAndExecute(input, taskList);
         String response = String.join("\n", messages);
-        if (input != null && input.trim().equalsIgnoreCase("bye")) {
+        if (input != null && Action.findAction(input).equals(Action.BYE)) {
             Platform.runLater(() -> {
                 PauseTransition delay = new PauseTransition(Duration.millis(1000));
                 delay.setOnFinished(event -> Platform.exit());
