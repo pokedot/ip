@@ -7,14 +7,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Represents a Deadline task, which is a type of Task with a due date.
- * The description is parsed from the user input.
+ * Represents a {@code Deadline} task, a type of {@code Task}
+ * that includes a due date.
+ * <p>
+ * The task description is parsed from user input.
+ * </p>
  */
 public class Deadline extends Task {
     private final LocalDate deadline;
 
     /**
-     * Creates a new Deadline task from the given description.
+     * Creates a new {@code Deadline} task from the given description.
      *
      * @param description the user input containing the "deadline" keyword, task description, and due date
      * @throws MissingTaskException if the task description and/or the due date is missing
@@ -25,7 +28,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates a Deadline task from its serialized string form
+     * Creates a {@code Deadline} task from its serialized string form
      *
      * @param isDone the state of completion of the deadline
      * @param item the deadline item
@@ -37,7 +40,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Extracts the task description and due date from the user input.
+     * Extracts the {@code Deadline} description and due date from the user input.
      *
      * @param description the raw input string
      * @return the parsed task description and due date
@@ -56,7 +59,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Converts the deadline to a serialized string to be saved to a text file for future retrieval.
+     * Converts the {@code Deadline} to a serialized string to be saved to a text file for future retrieval.
      *
      * @return a string that corresponds to the deadline
      */
@@ -69,7 +72,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a string representation of the Deadline task.
+     * Returns a string representation of the {@code Deadline} task.
      *
      * @return a string showing task type, completion status, task description, and due date
      */

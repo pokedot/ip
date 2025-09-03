@@ -1,16 +1,23 @@
 package flyingnugget;
 
-import flyingnugget.task.*;
-
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import flyingnugget.task.Deadline;
+import flyingnugget.task.Event;
+import flyingnugget.task.MissingTaskException;
+import flyingnugget.task.Task;
+import flyingnugget.task.TaskList;
+import flyingnugget.task.Todo;
+
 /**
- * Handles the parsing of user inputs and executes the corresponding commands.
- * This class also handles exceptions from invalid user inputs and returns messages to
- * guide the user in sending valid ones.
+ * Parses user input and executes the corresponding commands.
+ * <p>
+ * Also validates inputs, handling exceptions from invalid commands,
+ * and returns helpful messages to guide the user toward valid usage.
+ * </p>
  */
 public class Parser {
 
@@ -147,6 +154,7 @@ public class Parser {
             }
             break;
         case UNKNOWN:
+        default:
             lines.add("FlyingNugget has never heard that before!");
         }
         return lines;

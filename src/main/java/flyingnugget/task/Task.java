@@ -1,17 +1,18 @@
 package flyingnugget.task;
 
-/** Represents a Task which tracks an item and its completion state.
- * This is the base class for Todo, Deadline, and Event.
+/**
+ * Represents a {@code Task} which tracks an item and its completion state.
+ * This is the base class for {@code Todo}, {@code Deadline}, and {@code Event}.
  */
 public class Task {
     private boolean isDone;
     private final String item;
 
     /**
-     * Creates a new Task with the item.
-     * By default, the task is not done.
+     * Creates a new {@code Task} with the item.
+     * By default, the {@code Task} is not done.
      *
-     * @param item the description of the task
+     * @param item the description of the {@code Task}
      */
     Task(String item) {
         this.isDone = false;
@@ -19,10 +20,10 @@ public class Task {
     }
 
     /**
-     * Creates a new Task with its completion state and item.
+     * Creates a new {@code Task} with its completion state and item.
      *
-     * @param isDone the completion state of the task
-     * @param item the description of the task
+     * @param isDone the completion state of the {@code Task}
+     * @param item the description of the {@code Task}
      */
     Task(boolean isDone, String item) {
         this.isDone = isDone;
@@ -30,11 +31,11 @@ public class Task {
     }
 
     /**
-     * Takes in the serialized form of a task and returns a
-     * todo, deadline, or event with its respective attributes based on its task type.
+     * Takes in the serialized form of a {@code Task} and returns a
+     * {@code Todo}, {@code Deadline}, or {@code Event} with its respective attributes based on its task type.
      *
-     * @param serializedTask the seralized form of a task
-     * @return Task which corresponds to its serialized form
+     * @param serializedTask the serialized form of a {@code Task}
+     * @return {@code Task} which corresponds to its serialized form
      */
     public static Task read(String serializedTask) {
         String[] parts = serializedTask.split("\\|");
@@ -50,32 +51,34 @@ public class Task {
         case "E":
             task = new Event(Boolean.parseBoolean(parts[1]), parts[2], parts[3], parts[4]);
             break;
+        default:
+            throw new IllegalArgumentException("Unknown task type: " + taskType);
         }
         return task;
     }
 
     /**
-     * Returns the completion status of the task.
+     * Returns the completion status of the {@code Task}.
      *
-     * @return true if the task is done, false otherwise
+     * @return true if the {@code Task} is done, false otherwise
      */
     public boolean getIsDone() {
         return this.isDone;
     }
 
     /**
-     * Returns the description of the task.
+     * Returns the description of the {@code Task}.
      *
-     * @return the task description
+     * @return the {@code Task} description
      */
     public String getItem() {
         return this.item;
     }
 
     /**
-     * Marks the task as done and returns its string representation.
+     * Marks the {@code Task} as done and returns its string representation.
      *
-     * @return the string representation of the task after marking it as done
+     * @return the string representation of the {@code Task} after marking it as done
      */
     public String markAsDone() {
         this.isDone = true;
@@ -83,9 +86,9 @@ public class Task {
     }
 
     /**
-     * Marks the task as undone and returns its string representation.
+     * Marks the {@code Task} as undone and returns its string representation.
      *
-     * @return the string representation of the task after marking it as undone
+     * @return the string representation of the {@code Task} after marking it as undone
      */
     public String markAsUndone() {
         this.isDone = false;
@@ -97,10 +100,10 @@ public class Task {
     }
 
     /**
-     * Returns a string representation of the task.
+     * Returns a string representation of the {@code Task}.
      * Subclasses should override this to provide task-specific formatting.
      *
-     * @return the string representation of the task
+     * @return the string representation of the {@code Task}
      */
     @Override
     public String toString() {

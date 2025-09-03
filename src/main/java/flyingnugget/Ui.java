@@ -1,7 +1,7 @@
 package flyingnugget;
 
 /**
- * Handles all user interface outputs for the FlyingNugget chatbot.
+ * Handles all user interface outputs for the {@code FlyingNugget} chatbot.
  */
 public class Ui {
     private static final String INTRO = """

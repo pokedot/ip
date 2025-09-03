@@ -1,5 +1,17 @@
 package flyingnugget;
 
+/**
+ * Represents the different types of commands or actions
+ * that can be issued by the user in the application.
+ * <p>
+ * This enum defines supported commands such as creating tasks
+ * ({@code TODO}, {@code DEADLINE}, {@code EVENT}),
+ * modifying tasks ({@code MARK}, {@code UNMARK}),
+ * deleting tasks ({@code DELETE}),
+ * retrieving task information ({@code LIST}, {@code FIND}),
+ * and handling unrecognized input ({@code UNKNOWN}).
+ * </p>
+ */
 public enum Action {
     BYE,
     LIST,

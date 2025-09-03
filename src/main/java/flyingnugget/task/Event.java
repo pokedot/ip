@@ -7,15 +7,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Represents an Event task, which is a type of Task with a start date and end date.
- * The description is parsed from the user input.
+ * Represents an {@code Event} task, a type of {@code Task}
+ * that includes a start and end date.
+ * <p>
+ * The task description is parsed from user input.
+ * </p>
  */
 public class Event extends Task {
     private final LocalDate start;
     private final LocalDate end;
 
     /**
-     * Creates a new Event task from the given description.
+     * Creates a new {@code Event} task from the given description.
      *
      * @param description the user input containing the "event" keyword, task description, start date, and end date
      * @throws MissingTaskException if the task description, the start date, and/or the end date is missing
@@ -27,12 +30,12 @@ public class Event extends Task {
     }
 
     /**
-     * Creates an Event task from its serialized string form
+     * Creates an {@code Event} task from its serialized string form
      *
-     * @param isDone the state of completion of the event
-     * @param item the event item
-     * @param start the event start date
-     * @param end the event end date
+     * @param isDone the state of completion of the {@code Event}
+     * @param item the {@code Event} item
+     * @param start the {@code Event} start date
+     * @param end the {@code Event} end date
      */
     Event(boolean isDone, String item, String start, String end) {
         super(isDone, item);
@@ -41,7 +44,7 @@ public class Event extends Task {
     }
 
     /**
-     * Extracts the task description, start date, and end date from the user input.
+     * Extracts the {@code Event} description, start date, and end date from the user input.
      *
      * @param description the raw input string
      * @return the parsed task description, start date, and end date
@@ -61,9 +64,9 @@ public class Event extends Task {
     }
 
     /**
-     * Converts the event to a serialized string to be saved to a text file for future retrieval.
+     * Converts the {@code Event} to a serialized string to be saved to a text file for future retrieval.
      *
-     * @return a string that corresponds to the event
+     * @return a string that corresponds to the {@code Event}
      */
     @Override
     public String serialize() {
@@ -75,7 +78,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a string representation of the Event task.
+     * Returns a string representation of the {@code Event} task.
      *
      * @return a string showing task type, completion status, task description, start date, and end date
      */

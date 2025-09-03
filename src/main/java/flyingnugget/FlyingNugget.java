@@ -1,14 +1,16 @@
 package flyingnugget;
 
-import flyingnugget.task.TaskList;
-
 import java.util.List;
 import java.util.Scanner;
 
+import flyingnugget.task.TaskList;
+
 /**
- * The FlyingNugget class is a task management chatbot
- * that allows users to add/delete tasks and mark/unmark their completions.
- * It supports Todo, Event, and Deadline tasks.
+ * A task management chatbot that allows users to add, delete,
+ * mark, and unmark tasks.
+ * <p>
+ * Supports three types of tasks: {@code Todo}, {@code Event}, and {@code Deadline}.
+ * </p>
  */
 public class FlyingNugget {
 
