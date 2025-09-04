@@ -6,6 +6,7 @@ import flyingnugget.FlyingNugget;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -19,6 +20,11 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            stage.setMinHeight(220);
+            stage.setMinWidth(417);
+            stage.setTitle("FlyingNugget");
+            Image icon = new Image("/images/FlyingNuggetIcon.jpg");
+            stage.getIcons().add(icon);
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
