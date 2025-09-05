@@ -14,7 +14,7 @@ import flyingnugget.task.TaskList;
 public class ParserTest {
 
     @Test
-    public void testTodo() {
+    public void testTodo_validString() {
         Storage storage = new Storage("./data/FlyingNugget.txt");
         TaskList taskList = new TaskList(storage);
 

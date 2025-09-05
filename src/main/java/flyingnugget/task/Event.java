@@ -20,8 +20,8 @@ public class Event extends Task {
     /**
      * Creates a new {@code Event} task from the given description.
      *
-     * @param description the user input containing the "event" keyword, task description, start date, and end date
-     * @throws MissingTaskException if the task description, the start date, and/or the end date is missing
+     * @param description the user input containing the "event" keyword, task description, start date, and end date.
+     * @throws MissingTaskException if the task description, the start date, and/or the end date is missing.
      */
     public Event(String description) throws MissingTaskException, DateTimeParseException {
         super(parse(description)[0]);
@@ -32,10 +32,10 @@ public class Event extends Task {
     /**
      * Creates an {@code Event} task from its serialized string form
      *
-     * @param isDone the state of completion of the {@code Event}
-     * @param item the {@code Event} item
-     * @param start the {@code Event} start date
-     * @param end the {@code Event} end date
+     * @param isDone the state of completion of the {@code Event}.
+     * @param item the {@code Event} item.
+     * @param start the {@code Event} start date.
+     * @param end the {@code Event} end date.
      */
     Event(boolean isDone, String item, String start, String end) {
         super(isDone, item);
@@ -46,9 +46,9 @@ public class Event extends Task {
     /**
      * Extracts the {@code Event} description, start date, and end date from the user input.
      *
-     * @param description the raw input string
-     * @return the parsed task description, start date, and end date
-     * @throws MissingTaskException if the task description, the start date, and/or the end date is missing
+     * @param description the raw input string.
+     * @return the parsed task description, start date, and end date.
+     * @throws MissingTaskException if the task description, the start date, and/or the end date is missing.
      */
     private static String[] parse(String description) throws MissingTaskException {
         Pattern pattern = Pattern.compile("event (.*?) /from (.*?) /to (.*)");
@@ -66,10 +66,10 @@ public class Event extends Task {
     /**
      * Converts the {@code Event} to a serialized string to be saved to a text file for future retrieval.
      *
-     * @return a string that corresponds to the {@code Event}
+     * @return a string that corresponds to the {@code Event}.
      */
     @Override
-    public String serialize() {
+    public String serializeString() {
         return "E|"
                 + this.getIsDone() + "|"
                 + this.getItem() + "|"
@@ -80,7 +80,7 @@ public class Event extends Task {
     /**
      * Returns a string representation of the {@code Event} task.
      *
-     * @return a string showing task type, completion status, task description, start date, and end date
+     * @return a string showing task type, completion status, task description, start date, and end date.
      */
     @Override
     public String toString() {

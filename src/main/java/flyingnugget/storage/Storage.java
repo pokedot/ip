@@ -24,8 +24,8 @@ public class Storage {
     /**
      * Loads the task list from the file path.
      *
-     * @return a list of tasks that corresponds to the content in the file path
-     * @throws IOException if an I/O error occurs while creating, opening, or reading the file
+     * @return a list of tasks that corresponds to the content in the file path.
+     * @throws IOException if an I/O error occurs while creating, opening, or reading the file.
      */
     public List<Task> load() throws IOException {
         File file = new File(filePath);
@@ -46,12 +46,12 @@ public class Storage {
     /**
      * Saves the task list to the file path.
      *
-     * @throws IOException if an I/O error occurs while saving the file
+     * @throws IOException if an I/O error occurs while saving the file.
      */
     public void save(List<Task> tasks) throws IOException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             for (Task task : tasks) {
-                bw.write(task.serialize());
+                bw.write(task.serializeString());
                 bw.newLine();
             }
         }

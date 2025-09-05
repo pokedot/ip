@@ -34,7 +34,7 @@ public class Ui {
     /**
      * Prints all messages per {@code Action} in an enclosed box with a tab indent.
      *
-     * @param messages one or more strings to print in the box
+     * @param messages one or more strings to print in the box.
      */
     private static void printBox(String... messages) {
         System.out.println(LINE);

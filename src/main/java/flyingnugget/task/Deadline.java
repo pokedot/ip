@@ -19,8 +19,8 @@ public class Deadline extends Task {
     /**
      * Creates a new {@code Deadline} task from the given description.
      *
-     * @param description the user input containing the "deadline" keyword, task description, and due date
-     * @throws MissingTaskException if the task description and/or the due date is missing
+     * @param description the user input containing the "deadline" keyword, task description, and due date.
+     * @throws MissingTaskException if the task description and/or the due date is missing.
      */
     public Deadline(String description) throws MissingTaskException, DateTimeParseException {
         super(parse(description)[0]);
@@ -30,9 +30,9 @@ public class Deadline extends Task {
     /**
      * Creates a {@code Deadline} task from its serialized string form
      *
-     * @param isDone the state of completion of the deadline
-     * @param item the deadline item
-     * @param deadline the deadline date
+     * @param isDone the state of completion of the deadline.
+     * @param item the deadline item.
+     * @param deadline the deadline date.
      */
     Deadline(boolean isDone, String item, String deadline) {
         super(isDone, item);
@@ -42,9 +42,9 @@ public class Deadline extends Task {
     /**
      * Extracts the {@code Deadline} description and due date from the user input.
      *
-     * @param description the raw input string
-     * @return the parsed task description and due date
-     * @throws MissingTaskException if the task description and/or the due date is missing
+     * @param description the raw input string.
+     * @return the parsed task description and due date.
+     * @throws MissingTaskException if the task description and/or the due date is missing.
      */
     private static String[] parse(String description) throws MissingTaskException {
         Pattern pattern = Pattern.compile("deadline (.*?) /by (.*?)");
@@ -61,10 +61,10 @@ public class Deadline extends Task {
     /**
      * Converts the {@code Deadline} to a serialized string to be saved to a text file for future retrieval.
      *
-     * @return a string that corresponds to the deadline
+     * @return a string that corresponds to the deadline.
      */
     @Override
-    public String serialize() {
+    public String serializeString() {
         return "D|"
                 + this.getIsDone() + "|"
                 + this.getItem()
@@ -74,7 +74,7 @@ public class Deadline extends Task {
     /**
      * Returns a string representation of the {@code Deadline} task.
      *
-     * @return a string showing task type, completion status, task description, and due date
+     * @return a string showing task type, completion status, task description, and due date.
      */
     @Override
     public String toString() {

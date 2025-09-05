@@ -40,7 +40,7 @@ public class FlyingNugget {
      * The main entry point for the text-based UI of the chatbot.
      * Initializes the application and starts the main loop.
      *
-     * @param args (not used)
+     * @param args (not used).
      */
     public static void main(String[] args) {
         new FlyingNugget().run();
@@ -81,8 +81,8 @@ public class FlyingNugget {
      * The main method to retrieve responses for the GUI of the chatbot.
      * If a "bye" is entered by the user, there is a brief delay before the app closes.
      *
-     * @param input the message entered by the user
-     * @return a String of the chatbot's response to the user input
+     * @param input the message entered by the user.
+     * @return a String of the chatbot's response to the user input.
      */
     public String getResponse(String input) {
         List<String> messages = Parser.parseAndExecute(input, taskList);

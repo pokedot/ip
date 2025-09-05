@@ -25,9 +25,9 @@ public class Parser {
      * Takes in a string input and executes various actions based on the action enum,
      * returning a list of strings as output to be shown to the user and modifying the task list if needed.
      *
-     * @param input the input entered by the user
-     * @param taskList the user's current list of tasks
-     * @return a list of strings which are messages to be shown to the user
+     * @param input the input entered by the user.
+     * @param taskList the user's current list of tasks.
+     * @return a list of strings which are messages to be shown to the user.
      */
     public static List<String> parseAndExecute(String input, TaskList taskList) {
         Action action = Action.findAction(input);
@@ -164,9 +164,9 @@ public class Parser {
      * Adds a task to the task list if the action is a todo, deadline, or event,
      * and returns a list of corresponding messages to be shown to the user.
      *
-     * @param task the task to be added to the task list
-     * @param taskList the user's current list of tasks
-     * @return a list of strings which are messages to be shown to the user
+     * @param task the task to be added to the task list.
+     * @param taskList the user's current list of tasks.
+     * @return a list of strings which are messages to be shown to the user.
      */
     private static List<String> addTask(Task task, TaskList taskList) {
         List<String> lines = new ArrayList<>();
@@ -186,9 +186,9 @@ public class Parser {
      * Removes a task from the task list if the action is a delete,
      * and returns a list of corresponding messages to be shown to the user.
      *
-     * @param taskNumber the task number to be deleted from the task list
-     * @param taskList the user's current list of tasks
-     * @return a list of strings which are messages to be shown to the user
+     * @param taskNumber the task number to be deleted from the task list.
+     * @param taskList the user's current list of tasks.
+     * @return a list of strings which are messages to be shown to the user.
      */
     private static List<String> deleteTask(int taskNumber, TaskList taskList) {
         List<String> lines = new ArrayList<>();

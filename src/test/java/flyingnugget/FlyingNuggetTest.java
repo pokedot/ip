@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 public class FlyingNuggetTest {
 
     @Test
-    public void testOne() throws IOException {
-        Path inputPath = Paths.get("src/test/java/flyingnugget/testOneInput.txt");
+    public void testActions_validStrings() throws IOException {
+        Path inputPath = Paths.get("src/test/java/flyingnugget/testActions_validStrings_input.txt");
         String testInput = Files.readString(inputPath);
         ByteArrayInputStream inputStream = new ByteArrayInputStream(testInput.getBytes());
         System.setIn(inputStream);
@@ -35,7 +35,7 @@ public class FlyingNuggetTest {
             System.setOut(originalOut);
         }
 
-        Path expectedPath = Paths.get("src/test/java/flyingnugget/testOneExpectedOutput.txt");
+        Path expectedPath = Paths.get("src/test/java/flyingnugget/testActions_validStrings_expectedOutput.txt");
         List<String> expectedOutput = Files.readAllLines(expectedPath);
 
         String actualOutput = outputStream.toString().trim();

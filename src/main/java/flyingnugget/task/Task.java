@@ -12,7 +12,7 @@ public class Task {
      * Creates a new {@code Task} with the item.
      * By default, the {@code Task} is not done.
      *
-     * @param item the description of the {@code Task}
+     * @param item the description of the {@code Task}.
      */
     Task(String item) {
         this.isDone = false;
@@ -22,8 +22,8 @@ public class Task {
     /**
      * Creates a new {@code Task} with its completion state and item.
      *
-     * @param isDone the completion state of the {@code Task}
-     * @param item the description of the {@code Task}
+     * @param isDone the completion state of the {@code Task}.
+     * @param item the description of the {@code Task}.
      */
     Task(boolean isDone, String item) {
         this.isDone = isDone;
@@ -34,8 +34,8 @@ public class Task {
      * Takes in the serialized form of a {@code Task} and returns a
      * {@code Todo}, {@code Deadline}, or {@code Event} with its respective attributes based on its task type.
      *
-     * @param serializedTask the serialized form of a {@code Task}
-     * @return {@code Task} which corresponds to its serialized form
+     * @param serializedTask the serialized form of a {@code Task}.
+     * @return {@code Task} which corresponds to its serialized form.
      */
     public static Task read(String serializedTask) {
         String[] parts = serializedTask.split("\\|");
@@ -60,7 +60,7 @@ public class Task {
     /**
      * Returns the completion status of the {@code Task}.
      *
-     * @return true if the {@code Task} is done, false otherwise
+     * @return true if the {@code Task} is done, false otherwise.
      */
     public boolean getIsDone() {
         return this.isDone;
@@ -69,7 +69,7 @@ public class Task {
     /**
      * Returns the description of the {@code Task}.
      *
-     * @return the {@code Task} description
+     * @return the {@code Task} description.
      */
     public String getItem() {
         return this.item;
@@ -78,7 +78,7 @@ public class Task {
     /**
      * Marks the {@code Task} as done and returns its string representation.
      *
-     * @return the string representation of the {@code Task} after marking it as done
+     * @return the string representation of the {@code Task} after marking it as done.
      */
     public String markAsDone() {
         this.isDone = true;
@@ -88,14 +88,14 @@ public class Task {
     /**
      * Marks the {@code Task} as undone and returns its string representation.
      *
-     * @return the string representation of the {@code Task} after marking it as undone
+     * @return the string representation of the {@code Task} after marking it as undone.
      */
     public String markAsUndone() {
         this.isDone = false;
         return this.toString();
     }
 
-    public String serialize() {
+    public String serializeString() {
         return this.isDone + " | " + this.item;
     }
 
@@ -103,7 +103,7 @@ public class Task {
      * Returns a string representation of the {@code Task}.
      * Subclasses should override this to provide task-specific formatting.
      *
-     * @return the string representation of the {@code Task}
+     * @return the string representation of the {@code Task}.
      */
     @Override
     public String toString() {
