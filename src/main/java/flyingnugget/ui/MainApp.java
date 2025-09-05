@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class MainApp extends Application {
 
-    private FlyingNugget flyingNugget = new FlyingNugget();
+    private final FlyingNugget flyingNugget = new FlyingNugget();
 
     @Override
     public void start(Stage stage) {

@@ -23,6 +23,15 @@ public class Ui {
                 "What can FlyingNugget do for LittleNuggy?");
     }
 
+    /**
+     * Returns the introduction message for the chatbot as a String.
+     *
+     * @return String corresponding to the intro message.
+     */
+    public static String getIntro() {
+        return "Yaho-! FlyingNugget's FlyingNugget!\nWhat can FlyingNugget do for LittleNuggy?";
+    }
+
     public static void showMessages(String[] messages) {
         printBox(messages);
     }

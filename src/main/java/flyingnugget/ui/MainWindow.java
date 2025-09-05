@@ -34,6 +34,8 @@ public class MainWindow {
     /** Injects the FlyingNugget instance */
     public void setFlyingNugget(FlyingNugget f) {
         flyingNugget = f;
+        dialogContainer.getChildren().add(
+                DialogBox.getBotDialog(Ui.getIntro(), botImage));
     }
 
     /**
