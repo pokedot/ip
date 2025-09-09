@@ -28,6 +28,8 @@ public class Storage {
      * @throws IOException if an I/O error occurs while creating, opening, or reading the file.
      */
     public List<Task> load() throws IOException {
+        assert filePath != null : "filePath should not be null";
+        assert !filePath.isEmpty() : "filePath should not be empty";
         File file = new File(filePath);
         file.getParentFile().mkdirs();
         file.createNewFile();

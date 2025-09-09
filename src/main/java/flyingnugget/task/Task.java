@@ -40,15 +40,18 @@ public class Task {
     public static Task read(String serializedTask) {
         String[] parts = serializedTask.split("\\|");
         String taskType = parts[0];
-        Task task = null;
+        Task task;
         switch (taskType) {
         case "T":
+            assert parts.length == 3 : "number of parts should be 3";
             task = new Todo(Boolean.parseBoolean(parts[1]), parts[2]);
             break;
         case "D":
+            assert parts.length == 4 : "number of parts should be 4";
             task = new Deadline(Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
             break;
         case "E":
+            assert parts.length == 5 : "number of parts should be 5";
             task = new Event(Boolean.parseBoolean(parts[1]), parts[2], parts[3], parts[4]);
             break;
         default:

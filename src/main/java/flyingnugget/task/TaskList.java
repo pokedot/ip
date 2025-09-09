@@ -60,6 +60,8 @@ public class TaskList {
      * @param taskNumber the task number to be deleted.
      */
     public void deleteTask(int taskNumber) {
+        assert taskNumber > 0 : "taskNumber should be positive";
+        assert taskNumber <= tasks.size() : "taskNumber should be equal or smaller than the number of tasks";
         this.tasks.remove(taskNumber - 1);
     }
 
@@ -69,6 +71,8 @@ public class TaskList {
      * @param taskNumber the task number to be retrieved.
      */
     public Task getTask(int taskNumber) {
+        assert taskNumber > 0 : "taskNumber should be positive";
+        assert taskNumber <= tasks.size() : "taskNumber should be equal or smaller than the number of tasks";
         return this.tasks.get(taskNumber - 1);
     }
 
