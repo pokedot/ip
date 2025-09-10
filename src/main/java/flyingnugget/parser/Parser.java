@@ -35,160 +35,221 @@ public class Parser {
 
         switch (action) {
         case BYE:
-            lines.add("Bye! See LittleNuggy soon!");
+            lines.addAll(handleBye());
             break;
         case LIST:
-            lines.add("Ok~! Here are LittleNuggy's tasks!");
-            List<Task> tasks = taskList.getAllTasks();
-            for (int i = 0; i < tasks.size(); i++) {
-                lines.add((i + 1) + "." + tasks.get(i));
-            }
-            if (tasks.isEmpty()) {
-                lines.add("  (Nothing to see here.)");
-                lines.add("Seems like LittleNuggy is very free right now!");
-            }
+            lines.addAll(handleList(taskList));
             break;
         case MARK:
-            try {
-                int taskNumber = Integer.parseInt(input.split(" ")[1]);
-                String taskInfo = taskList.markTaskAsDone(taskNumber);
-                taskList.saveTasks();
-                lines.add("Sugoi desu! LittleNuggy finished LittleNuggy's task!");
-                lines.add("  " + taskInfo);
-            } catch (NumberFormatException e) {
-                lines.add("FlyingNugget does not have LittleNuggy's task number!");
-                lines.add("(Ensure your mark is of the following format: \"mark [number]\".)");
-            } catch (IndexOutOfBoundsException e) {
-                lines.add("FlyingNugget does not see this task number in LittleNuggy's list!");
-                lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            lines.addAll(handleMark(input, taskList));
             break;
         case UNMARK:
-            try {
-                int taskNumber = Integer.parseInt(input.split(" ")[1]);
-                String taskInfo = taskList.markTaskAsUndone(taskNumber);
-                taskList.saveTasks();
-                lines.add("Nani? LittleNuggy lied to FlyingNugget?");
-                lines.add("  " + taskInfo);
-            } catch (NumberFormatException e) {
-                lines.add("FlyingNugget does not have LittleNuggy's task number!");
-                lines.add("(Ensure your unmark is of the following format: \"unmark [number]\".)");
-            } catch (IndexOutOfBoundsException e) {
-                lines.add("FlyingNugget does not see this task number on LittleNuggy's list!");
-                lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            lines.addAll(handleUnmark(input, taskList));
             break;
         case TODO:
-            try {
-                lines.addAll(Parser.addTask(new Todo(input), taskList));
-                taskList.saveTasks();
-            } catch (MissingTaskException e) {
-                lines.add("Where is LittleNuggy's todo?");
-                lines.add("(Ensure your todo is of the following format: \"todo [task]\".)");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            lines.addAll(handleTodo(input, taskList));
             break;
         case DEADLINE:
-            try {
-                lines.addAll(Parser.addTask(new Deadline(input), taskList));
-                taskList.saveTasks();
-            } catch (MissingTaskException e) {
-                lines.add("When is LittleNuggy's deadline?");
-                lines.add("(Ensure your deadline is of the following format: \"deadline [task] /by [dueDate]\".)");
-            } catch (DateTimeParseException e) {
-                lines.add("FlyingNugget needs a valid deadline to help LittleNuggy!");
-                lines.add("(Ensure your deadline is in the following format: YYYY-MM-DD.)");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            lines.addAll(handleDeadline(input, taskList));
             break;
         case EVENT:
-            try {
-                lines.addAll(Parser.addTask(new Event(input), taskList));
-                taskList.saveTasks();
-            } catch (MissingTaskException e) {
-                lines.add("When is LittleNuggy's event?");
-                lines.add("(Ensure your event is of the following format: \"event [task] /from [start] /to [end]\".)");
-            } catch (DateTimeParseException e) {
-                lines.add("FlyingNugget needs a valid start and end date to help LittleNuggy!");
-                lines.add("(Ensure your start and end dates are in the following format: YYYY-MM-DD.)");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            lines.addAll(handleEvent(input, taskList));
             break;
         case DELETE:
-            try {
-                int taskNumber = Integer.parseInt(input.split(" ")[1]);
-                lines.addAll(Parser.deleteTask(taskNumber, taskList));
-                taskList.saveTasks();
-            } catch (NumberFormatException e) {
-                lines.add("FlyingNugget does not have LittleNuggy's task number!");
-                lines.add("(Ensure your delete is of the following format: \"delete [number]\".)");
-            } catch (IndexOutOfBoundsException e) {
-                lines.add("FlyingNugget does not see this task number on LittleNuggy's list!");
-                lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            lines.addAll(handleDelete(input, taskList));
             break;
         case FIND:
-            try {
-                String keyword = input.split(" ", 2)[1];
-                lines.add("Ok~! Here are all of LittleNuggy's related tasks!");
-                List<Task> filteredTasks = taskList.find(keyword);
-                for (Task filteredTask : filteredTasks) {
-                    lines.add("  " + filteredTask);
-                }
-                if (filteredTasks.isEmpty()) {
-                    lines.add("  (Nothing to see here.)");
-                    lines.add("Seems like LittleNuggy has no related tasks with that keyword!");
-                }
-            } catch (IndexOutOfBoundsException e) {
-                lines.add("FlyingNugget does not have a keyword to search with!");
-                lines.add("(Ensure your find is of the following format: \"find [keyword(s)]\".)");
-            }
+            lines.addAll(handleFind(input, taskList));
             break;
         case SNOOZE:
-            try {
-                String[] parts = input.trim().split(" ", 3);
-                int taskNumber = Integer.parseInt(parts[1]);
-                taskList.getTask(taskNumber);
-                if (parts.length < 3) {
-                    throw new IllegalArgumentException();
-                }
-                String dates = parts[2];
-                if (taskList.canRescheduleWith(taskNumber, dates)) {
-                    String task = taskList.reschedule(taskNumber, dates).toString();
-                    lines.add("Ok~! FlyingNugget has snoozed LittleNuggy's task!");
-                    lines.add("  " + task);
-                } else {
-                    lines.add("FlyingNugget cannot snooze that task!");
-                    lines.add("(Only deadlines and events can be snoozed.");
-                    lines.add("For deadlines, ensure your snooze is of the following format: "
-                            + "\"snooze [task number] /by [new deadline]\".");
-                    lines.add("For events, ensure your snooze is of the following format: "
-                            + "\"snooze [task number] /from [new start] /to [new end]\".)");
-                }
-            } catch (IndexOutOfBoundsException e) {
-                lines.add("FlyingNugget does not see this task number on LittleNuggy's list!");
-                lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
-            } catch (IllegalArgumentException e) {
-                lines.add("FlyingNugget does not have LittleNuggy's task and dates!");
+            lines.addAll(handleSnooze(input, taskList));
+            break;
+        case UNKNOWN:
+        default:
+            lines.add("FlyingNugget has never heard that before!");
+        }
+        return lines;
+    }
+
+    private static List<String> handleBye() {
+        List<String> lines = new ArrayList<>();
+        lines.add("Bye! See LittleNuggy soon!");
+        return lines;
+    }
+
+    private static List<String> handleList(TaskList taskList) {
+        List<String> lines = new ArrayList<>();
+        lines.add("Ok~! Here are LittleNuggy's tasks!");
+        List<Task> tasks = taskList.getAllTasks();
+        for (int i = 0; i < tasks.size(); i++) {
+            lines.add((i + 1) + "." + tasks.get(i));
+        }
+        if (tasks.isEmpty()) {
+            lines.add("  (Nothing to see here.)");
+            lines.add("Seems like LittleNuggy is very free right now!");
+        }
+        return lines;
+    }
+
+    private static List<String> handleMark(String input, TaskList taskList) {
+        List<String> lines = new ArrayList<>();
+        try {
+            int taskNumber = Integer.parseInt(input.split(" ")[1]);
+            String taskInfo = taskList.markTaskAsDone(taskNumber);
+            taskList.saveTasks();
+            lines.add("Sugoi desu! LittleNuggy finished LittleNuggy's task!");
+            lines.add("  " + taskInfo);
+        } catch (NumberFormatException e) {
+            lines.add("FlyingNugget does not have LittleNuggy's task number!");
+            lines.add("(Ensure your mark is of the following format: \"mark [number]\".)");
+        } catch (IndexOutOfBoundsException e) {
+            lines.add("FlyingNugget does not see this task number in LittleNuggy's list!");
+            lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
+    }
+
+    private static List<String> handleUnmark(String input, TaskList taskList) {
+        List<String> lines = new ArrayList<>();
+        try {
+            int taskNumber = Integer.parseInt(input.split(" ")[1]);
+            String taskInfo = taskList.markTaskAsUndone(taskNumber);
+            taskList.saveTasks();
+            lines.add("Nani? LittleNuggy lied to FlyingNugget?");
+            lines.add("  " + taskInfo);
+        } catch (NumberFormatException e) {
+            lines.add("FlyingNugget does not have LittleNuggy's task number!");
+            lines.add("(Ensure your unmark is of the following format: \"unmark [number]\".)");
+        } catch (IndexOutOfBoundsException e) {
+            lines.add("FlyingNugget does not see this task number on LittleNuggy's list!");
+            lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
+    }
+
+    private static List<String> handleTodo(String input, TaskList taskList) {
+        List<String> lines = new ArrayList<>();
+        try {
+            lines.addAll(Parser.addTask(new Todo(input), taskList));
+            taskList.saveTasks();
+        } catch (MissingTaskException e) {
+            lines.add("Where is LittleNuggy's todo?");
+            lines.add("(Ensure your todo is of the following format: \"todo [task]\".)");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
+    }
+
+    private static List<String> handleDeadline(String input, TaskList taskList) {
+        List<String> lines = new ArrayList<>();
+        try {
+            lines.addAll(Parser.addTask(new Deadline(input), taskList));
+            taskList.saveTasks();
+        } catch (MissingTaskException e) {
+            lines.add("When is LittleNuggy's deadline?");
+            lines.add("(Ensure your deadline is of the following format: \"deadline [task] /by [dueDate]\".)");
+        } catch (DateTimeParseException e) {
+            lines.add("FlyingNugget needs a valid deadline to help LittleNuggy!");
+            lines.add("(Ensure your deadline is in the following format: YYYY-MM-DD.)");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
+    }
+
+    private static List<String> handleEvent(String input, TaskList taskList) {
+        List<String> lines = new ArrayList<>();
+        try {
+            lines.addAll(Parser.addTask(new Event(input), taskList));
+            taskList.saveTasks();
+        } catch (MissingTaskException e) {
+            lines.add("When is LittleNuggy's event?");
+            lines.add("(Ensure your event is of the following format: \"event [task] /from [start] /to [end]\".)");
+        } catch (DateTimeParseException e) {
+            lines.add("FlyingNugget needs a valid start and end date to help LittleNuggy!");
+            lines.add("(Ensure your start and end dates are in the following format: YYYY-MM-DD.)");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
+    }
+
+    private static List<String> handleDelete(String input, TaskList taskList) {
+        List<String> lines = new ArrayList<>();
+        try {
+            int taskNumber = Integer.parseInt(input.split(" ")[1]);
+            lines.addAll(Parser.deleteTask(taskNumber, taskList));
+            taskList.saveTasks();
+        } catch (NumberFormatException e) {
+            lines.add("FlyingNugget does not have LittleNuggy's task number!");
+            lines.add("(Ensure your delete is of the following format: \"delete [number]\".)");
+        } catch (IndexOutOfBoundsException e) {
+            lines.add("FlyingNugget does not see this task number on LittleNuggy's list!");
+            lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
+    }
+
+    private static List<String> handleFind(String input, TaskList taskList) {
+        List<String> lines = new ArrayList<>();
+        try {
+            String keyword = input.split(" ", 2)[1];
+            lines.add("Ok~! Here are all of LittleNuggy's related tasks!");
+
+            List<Task> filteredTasks = taskList.find(keyword);
+            for (Task filteredTask : filteredTasks) {
+                lines.add("  " + filteredTask);
+            }
+            if (filteredTasks.isEmpty()) {
+                lines.add("  (Nothing to see here.)");
+                lines.add("Seems like LittleNuggy has no related tasks with that keyword!");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            lines.add("FlyingNugget does not have a keyword to search with!");
+            lines.add("(Ensure your find is of the following format: \"find [keyword(s)]\".)");
+        }
+        return lines;
+    }
+
+    private static List<String> handleSnooze(String input, TaskList taskList) {
+        List<String> lines = new ArrayList<>();
+        try {
+            String[] parts = input.trim().split(" ", 3);
+            int taskNumber = Integer.parseInt(parts[1]);
+            taskList.getTask(taskNumber);
+            if (parts.length < 3) {
+                throw new IllegalArgumentException();
+            }
+            String dates = parts[2];
+            if (taskList.canRescheduleWith(taskNumber, dates)) {
+                String task = taskList.reschedule(taskNumber, dates).toString();
+                lines.add("Ok~! FlyingNugget has snoozed LittleNuggy's task!");
+                lines.add("  " + task);
+            } else {
+                lines.add("FlyingNugget cannot snooze that task!");
                 lines.add("(Only deadlines and events can be snoozed.");
                 lines.add("For deadlines, ensure your snooze is of the following format: "
                         + "\"snooze [task number] /by [new deadline]\".");
                 lines.add("For events, ensure your snooze is of the following format: "
                         + "\"snooze [task number] /from [new start] /to [new end]\".)");
             }
-            break;
-        case UNKNOWN:
-        default:
-            lines.add("FlyingNugget has never heard that before!");
+        } catch (IndexOutOfBoundsException e) {
+            lines.add("FlyingNugget does not see this task number on LittleNuggy's list!");
+            lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
+        } catch (IllegalArgumentException e) {
+            lines.add("FlyingNugget does not have LittleNuggy's task and dates!");
+            lines.add("(Only deadlines and events can be snoozed.");
+            lines.add("For deadlines, ensure your snooze is of the following format: "
+                    + "\"snooze [task number] /by [new deadline]\".");
+            lines.add("For events, ensure your snooze is of the following format: "
+                    + "\"snooze [task number] /from [new start] /to [new end]\".)");
         }
         return lines;
     }
