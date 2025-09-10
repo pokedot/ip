@@ -22,6 +22,7 @@ public enum Action {
     EVENT,
     DELETE,
     FIND,
+    SNOOZE,
     UNKNOWN;
 
     /**

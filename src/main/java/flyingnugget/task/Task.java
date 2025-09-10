@@ -98,6 +98,14 @@ public class Task {
         return this.toString();
     }
 
+    public boolean canRescheduleWith(String dates) {
+        return false;
+    }
+
+    public Task reschedule(String dates) {
+        return this;
+    }
+
     /**
      * Converts the {@code Task} to a serialized string to be saved to a text file for future retrieval.
      *

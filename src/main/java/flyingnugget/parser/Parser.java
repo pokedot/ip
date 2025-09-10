@@ -153,6 +153,39 @@ public class Parser {
                 lines.add("(Ensure your find is of the following format: \"find [keyword(s)]\".)");
             }
             break;
+        case SNOOZE:
+            try {
+                String[] parts = input.trim().split(" ", 3);
+                int taskNumber = Integer.parseInt(parts[1]);
+                taskList.getTask(taskNumber);
+                if (parts.length < 3) {
+                    throw new IllegalArgumentException();
+                }
+                String dates = parts[2];
+                if (taskList.canRescheduleWith(taskNumber, dates)) {
+                    String task = taskList.reschedule(taskNumber, dates).toString();
+                    lines.add("Ok~! FlyingNugget has snoozed LittleNuggy's task!");
+                    lines.add("  " + task);
+                } else {
+                    lines.add("FlyingNugget cannot snooze that task!");
+                    lines.add("(Only deadlines and events can be snoozed.");
+                    lines.add("For deadlines, ensure your snooze is of the following format: "
+                            + "\"snooze [task number] /by [new deadline]\".");
+                    lines.add("For events, ensure your snooze is of the following format: "
+                            + "\"snooze [task number] /from [new start] /to [new end]\".)");
+                }
+            } catch (IndexOutOfBoundsException e) {
+                lines.add("FlyingNugget does not see this task number on LittleNuggy's list!");
+                lines.add("(Type \"list\" to see all your current tasks and their numbers.)");
+            } catch (IllegalArgumentException e) {
+                lines.add("FlyingNugget does not have LittleNuggy's task and dates!");
+                lines.add("(Only deadlines and events can be snoozed.");
+                lines.add("For deadlines, ensure your snooze is of the following format: "
+                        + "\"snooze [task number] /by [new deadline]\".");
+                lines.add("For events, ensure your snooze is of the following format: "
+                        + "\"snooze [task number] /from [new start] /to [new end]\".)");
+            }
+            break;
         case UNKNOWN:
         default:
             lines.add("FlyingNugget has never heard that before!");
@@ -191,11 +224,11 @@ public class Parser {
      * @return a list of strings which are messages to be shown to the user.
      */
     private static List<String> deleteTask(int taskNumber, TaskList taskList) {
-        Task task = taskList.getTask(taskNumber);
+        String task = taskList.getTask(taskNumber).toString();
         List<String> lines = new ArrayList<>();
         taskList.deleteTask(taskNumber);
         lines.add("Ok~! FlyingNugget will remove this task for LittleNuggy!");
-        lines.add("  " + task.toString());
+        lines.add("  " + task);
         if (taskList.size() == 1) {
             lines.add("Now LittleNuggy has 1 task on LittleNuggy's list!");
         } else {
