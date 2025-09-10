@@ -98,8 +98,14 @@ public class Task {
         return this.toString();
     }
 
+    /**
+     * Converts the {@code Task} to a serialized string to be saved to a text file for future retrieval.
+     *
+     * @return a string that corresponds to the task.
+     */
     public String serializeString() {
-        return this.isDone + " | " + this.item;
+        return this.isDone + " | "
+                + this.item;
     }
 
     /**
@@ -110,6 +116,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return (isDone ? "[X] " : "[ ] ") + item;
+        return (isDone ? "[X] " : "[ ] ")
+                + item;
     }
 }

@@ -169,8 +169,8 @@ public class Parser {
      * @return a list of strings which are messages to be shown to the user.
      */
     private static List<String> addTask(Task task, TaskList taskList) {
-        List<String> lines = new ArrayList<>();
         taskList.addTask(task);
+        List<String> lines = new ArrayList<>();
         lines.add("Ok~! FlyingNugget will help LittleNuggy add this task!");
         lines.add("  " + task.toString());
         if (taskList.size() == 1) {
@@ -191,8 +191,8 @@ public class Parser {
      * @return a list of strings which are messages to be shown to the user.
      */
     private static List<String> deleteTask(int taskNumber, TaskList taskList) {
-        List<String> lines = new ArrayList<>();
         Task task = taskList.getTask(taskNumber);
+        List<String> lines = new ArrayList<>();
         taskList.deleteTask(taskNumber);
         lines.add("Ok~! FlyingNugget will remove this task for LittleNuggy!");
         lines.add("  " + task.toString());
