@@ -67,8 +67,8 @@ public class Deadline extends Task {
     public String serializeString() {
         return "D|"
                 + this.getIsDone() + "|"
-                + this.getItem()
-                + "|" + this.deadline;
+                + this.getItem() + "|"
+                + this.deadline;
     }
 
     /**

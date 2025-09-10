@@ -56,7 +56,9 @@ public class Todo extends Task {
      */
     @Override
     public String serializeString() {
-        return "T|" + this.getIsDone() + "|" + this.getItem();
+        return "T|"
+                + this.getIsDone() + "|"
+                + this.getItem();
     }
 
     /**
@@ -66,7 +68,9 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + (this.getIsDone() ? "[X] " : "[ ] ") + this.getItem();
+        return "[T]"
+                + (this.getIsDone() ? "[X] " : "[ ] ")
+                + this.getItem();
     }
 
 }

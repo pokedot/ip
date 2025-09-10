@@ -14,7 +14,6 @@ public class TaskList {
     private final List<Task> tasks;
     private final Storage storage;
 
-
     /**
      * Creates a new {@code TaskList} and tracks its corresponding storage path.
      *
