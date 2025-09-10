@@ -111,7 +111,8 @@ public class TaskList {
      * @return the list of tasks that match the given keyword.
      */
     public List<Task> find(String keyword) {
-        return this.tasks.stream()
+        return this.tasks
+                .stream()
                 .filter(x -> x.getItem().contains(keyword))
                 .toList();
     }
