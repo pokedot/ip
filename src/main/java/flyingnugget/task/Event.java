@@ -14,8 +14,8 @@ import java.util.regex.Pattern;
  * </p>
  */
 public class Event extends Task {
-    private final LocalDate start;
-    private final LocalDate end;
+    private LocalDate start;
+    private LocalDate end;
 
     /**
      * Creates a new {@code Event} task from the given description.
@@ -61,6 +61,26 @@ public class Event extends Task {
         } else {
             throw new MissingTaskException();
         }
+    }
+
+    @Override
+    public boolean canRescheduleWith(String dates) {
+        Pattern pattern = Pattern.compile("/from (.*?) /to (.*)");
+        Matcher matcher = pattern.matcher(dates);
+        return matcher.matches();
+    }
+
+    @Override
+    public Event reschedule(String dates) {
+        Pattern pattern = Pattern.compile("/from (.*?) /to (.*)");
+        Matcher matcher = pattern.matcher(dates);
+        if (matcher.matches()) {
+            String start = matcher.group(1);
+            String end = matcher.group(2);
+            this.start = LocalDate.parse(start);
+            this.end = LocalDate.parse(end);
+        }
+        return this;
     }
 
     /**

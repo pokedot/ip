@@ -118,6 +118,30 @@ public class TaskList {
     }
 
     /**
+     * Checks if the {@code Task} can be rescheduled based on the string of dates provided.
+     * {@code Todo} cannot be rescheduled, {@code Deadline} requires exactly 1 date,
+     * and {@code Event} requires 2 dates.
+     *
+     * @param taskNumber the task number to check.
+     * @param dates the string of dates to check against.
+     * @return a boolean representing if the rescheduling is valid.
+     */
+    public boolean canRescheduleWith(int taskNumber, String dates) {
+        return this.getTask(taskNumber).canRescheduleWith(dates);
+    }
+
+    /**
+     * Reschedules the {@code Task} corresponding to the task number with the new string of dates.
+     *
+     * @param taskNumber the task number to reschedule.
+     * @param dates the string of dates to reschedule with.
+     * @return the same {@code Task} with the dates changed.
+     */
+    public Task reschedule(int taskNumber, String dates) {
+        return this.getTask(taskNumber).reschedule(dates);
+    }
+
+    /**
      * Returns the current size of the {@code TaskList}.
      *
      * @return the number of tasks.

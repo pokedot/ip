@@ -3,8 +3,5 @@ T|true|find nugget
 E|true|find friend|2025-09-01|2025-09-02
 T|false|find pets
 D|false|finish homework|2025-10-10
-E|false|go for a walk|2025-10-10|2025-10-11
-T|false|order kfc
-T|false|cook littlenuggy
-D|false|dsa4262 assignment|2025-09-21
-T|false|kys
+E|true|go for a walk|2025-09-09|2025-10-01
+T|true|order kfc

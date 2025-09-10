@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  * </p>
  */
 public class Deadline extends Task {
-    private final LocalDate deadline;
+    private LocalDate deadline;
 
     /**
      * Creates a new {@code Deadline} task from the given description.
@@ -56,6 +56,24 @@ public class Deadline extends Task {
         } else {
             throw new MissingTaskException();
         }
+    }
+
+    @Override
+    public boolean canRescheduleWith(String dates) {
+        Pattern pattern = Pattern.compile("/by (.*?)");
+        Matcher matcher = pattern.matcher(dates);
+        return matcher.matches();
+    }
+
+    @Override
+    public Deadline reschedule(String dates) {
+        Pattern pattern = Pattern.compile("/by (.*?)");
+        Matcher matcher = pattern.matcher(dates);
+        if (matcher.matches()) {
+            String deadline = matcher.group(1);
+            this.deadline = LocalDate.parse(deadline);
+        }
+        return this;
     }
 
     /**
