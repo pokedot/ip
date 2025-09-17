@@ -1,30 +1,55 @@
-# FlyingNugget User Guide
+# FlyingNugget User Guide :chicken:
 
-// Update the title above to match the actual product name
+![product_image](./Ui.png)
 
-// Product screenshot goes here
+FlyingNugget is your premier option when it comes to task management! It has a fully designed Graphical User
+Interface (GUI) and allows you to handle your tasks gracefully and efficiently. This application supports 3 different
+types of tasks (todo, deadline and event), storage of task lists, and comes with multiple different commands to handle
+them effectively.
 
-// Product intro goes here
+---
+## Commands
+Here is a complete list of commands that the chatbot supports and examples of usage. Keywords are not case-sensitive.
 
-## Adding deadlines
+`list` — Shows the current list of tasks together with their task numbers and completion status.
+    - Example: `list`
 
-// Describe the action and its outcome.
+`todo [task description]` — Creates a todo task of the given description.
+    - Example: `todo finish homework`
+    - Example: `todo chores`
 
-// Give examples of usage
+`deadline [task description] /by [due date]` — Creates a deadline task of the given description and due date. 
+    - Note: Dates are of the format 'YYYY-MM-DD'.
+    - Example: `deadline submit quiz /by 2025-01-01`
 
-Example: `keyword (optional arguments)`
+`event [task description] /from [start date] /to [end date]` — Creates an event task of the given description, start date, and end date.
+    - Note: Dates are of the format 'YYYY-MM-DD'.
+    - Example: `event project meeting /from 2025-03-04 /to 2025-03-05`
 
-// A description of the expected outcome goes here
+`mark [task number]` —  Marks the task corresponding to the task number as completed.
+    - Example: `mark 1`
 
-```
-expected output
-```
+`unmark [task number]` — Unmarks the task corresponding to the task number.
+    - Example: `unmark 6`
 
-## Feature ABC
+`delete [task number]` — Deletes the task corresponding to the task number from the task list.
+    - Example: `delete 4`
 
-// Feature details
+`find [keyword(s)]` — Filters the list of tasks and shows the tasks that match the given keywords.
+    - Example: `find homework`
+    - Example: `find chores dishes`
 
+`snooze [deadline task number] /by [new due date]` — Changes the due date of the deadline corresponding to the task number.
+    - Note: Dates are of the format 'YYYY-MM-DD'.
+    - Example: `snooze 5 /by 2025-09-26`
 
-## Feature XYZ
+`snooze [event task number] /from [new start date] /to [new end date]` — Changes the start and end dates of the event corresponding to the task number.
+    - Note: Dates are of the format 'YYYY-MM-DD'.
+    - Example: `snooze 2 /from 2025-04-07 /to 2025-04-09`
 
-// Feature details
+`bye` — Closes the chatbot
+    - Example: `bye`
+
+---
+## Saving the data
+All tasks are automatically saved with every command. No additional action is required.
