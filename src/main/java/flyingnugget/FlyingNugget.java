@@ -78,7 +78,7 @@ public class FlyingNugget {
     }
 
     /**
-     * The main method to retrieve responses for the GUI of the chatbot.
+     * Retrieves responses for the GUI of the chatbot.
      * If a "bye" is entered by the user, there is a brief delay before the app closes.
      *
      * @param input the message entered by the user.

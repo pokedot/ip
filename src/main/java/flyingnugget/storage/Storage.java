@@ -3,6 +3,7 @@ package flyingnugget.storage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -28,21 +29,27 @@ public class Storage {
      * @throws IOException if an I/O error occurs while creating, opening, or reading the file.
      */
     public List<Task> load() throws IOException {
-        assert filePath != null : "filePath should not be null";
-        assert !filePath.isEmpty() : "filePath should not be empty";
-        File file = new File(filePath);
-        file.getParentFile().mkdirs();
-        file.createNewFile();
-        List<Task> tasks = new ArrayList<>();
+        try {
+            assert filePath != null : "filePath should not be null";
+            assert !filePath.isEmpty() : "filePath should not be empty";
+            File file = new File(filePath);
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+            List<Task> tasks = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                Task task = Task.read(line);
-                tasks.add(task);
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    Task task = Task.read(line);
+                    tasks.add(task);
+                }
             }
+            return tasks;
+        } catch (SecurityException e) {
+            throw new IOException("Permission denied: " + filePath, e);
+        } catch (FileNotFoundException e) {
+            throw new IOException("File not found: " + filePath, e);
         }
-        return tasks;
     }
 
     /**
