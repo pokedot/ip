@@ -5,22 +5,32 @@
 
 .text-field {
     -fx-background-color: rgb(225, 203, 239);
-    -fx-font: 20px "Verdana";
+    -fx-font: 16px "Verdana";
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: rgb(190, 133, 229);
+    -fx-border-width: 2px;
+    -fx-padding: 8px 12px;
 }
 
 .button {
     -fx-background-color: rgb(190, 133, 229);
     -fx-font: bold 14px "Verdana";
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: rgb(170, 113, 207);
+    -fx-border-width: 2px;
+    -fx-padding: 8px 16px;
 }
 
 .button:hover {
     -fx-background-color: rgb(170, 113, 207);
-    -fx-font-size: 16px;
+    -fx-font-size: 14px;
 }
 
 .button:pressed {
     -fx-background-color: rgb(153, 92, 173);
-    -fx-font-size: 18px;
+    -fx-font-size: 14px;
 }
 
 .scroll-pane,

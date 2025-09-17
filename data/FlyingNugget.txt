@@ -1,6 +1,7 @@
-T|false|eat dinner
+T|true|eat dinner
 T|true|find nugget
 E|true|find friend|2025-09-01|2025-09-02
 D|false|finish homework|2025-10-01
-E|true|go for a walk|2025-09-09|2025-10-01
+E|false|go for a walk|2025-09-09|2025-10-01
 T|true|order kfc
+D|false|wash dishes|2025-09-09
