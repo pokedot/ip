@@ -1,5 +1,6 @@
 package flyingnugget;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,6 +21,7 @@ import javafx.util.Duration;
  * </p>
  */
 public class FlyingNugget {
+    private final Storage storage;
     private final TaskList taskList;
     private boolean isRunning = true;
 
@@ -27,7 +29,20 @@ public class FlyingNugget {
      * Creates a {@code FlyingNugget} chatbot instance.
      */
     public FlyingNugget() {
-        Storage storage = new Storage("./data/FlyingNugget.txt");
+        this.storage = new Storage("./data/FlyingNugget.txt");
+        this.taskList = new TaskList(storage);
+        try {
+            this.taskList.loadTasks();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Creates a {@code FlyingNugget} chatbot instance with a specified filePath.
+     */
+    public FlyingNugget(String filePath) {
+        this.storage = new Storage(filePath);
         this.taskList = new TaskList(storage);
         try {
             this.taskList.loadTasks();
@@ -52,8 +67,6 @@ public class FlyingNugget {
      */
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        Storage storage = new Storage("./data/FlyingNugget.txt");
-
         TaskList taskList = new TaskList(storage);
         try {
             taskList.loadTasks();
@@ -95,5 +108,17 @@ public class FlyingNugget {
             });
         }
         return response;
+    }
+
+    /**
+     * Clears all tasks from the {@code TaskList}.
+     * Used for testing purposes only.
+     */
+    public void clearTasks() {
+        try {
+            this.taskList.clear();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

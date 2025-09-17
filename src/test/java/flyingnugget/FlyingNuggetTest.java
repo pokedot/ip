@@ -28,8 +28,9 @@ public class FlyingNuggetTest {
         System.setOut(new PrintStream(outputStream));
 
         try {
-            FlyingNugget bot = new FlyingNugget();
+            FlyingNugget bot = new FlyingNugget("./data/FlyingNuggetTest.txt");
             bot.run();
+            bot.clearTasks();
         } finally {
             System.setIn(System.in);
             System.setOut(originalOut);

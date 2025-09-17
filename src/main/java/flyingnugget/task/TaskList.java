@@ -149,4 +149,13 @@ public class TaskList {
     public int size() {
         return this.tasks.size();
     }
+
+    /**
+     * Clears all tasks from the {@code TaskList}.
+     * Used for testing purposes only.
+     */
+    public void clear() throws IOException {
+        this.tasks.clear();
+        this.storage.save(this.tasks);
+    }
 }

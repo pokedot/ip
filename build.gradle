@@ -63,7 +63,7 @@ shadowJar {
 }
 
 tasks.withType(Test).configureEach {
-    enabled = false
+    enabled = true
 }
 
 tasks.withType(Checkstyle).configureEach {
