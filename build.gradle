@@ -1,12 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
-}
-
-checkstyle {
-    toolVersion = '11.0.0'
 }
 
 repositories {
@@ -51,21 +46,11 @@ application {
     mainClass.set("flyingnugget.ui.Launcher")
 }
 
-
-// JavaFX runtime configuration
-run {
-    standardInput = System.in
-}
-
 shadowJar {
     archiveBaseName = "flyingnugget"
     archiveClassifier = null
 }
 
-tasks.withType(Test).configureEach {
-    enabled = true
-}
-
-tasks.withType(Checkstyle).configureEach {
-    enabled = false
+run {
+    standardInput = System.in
 }
