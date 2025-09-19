@@ -43,7 +43,11 @@ public class Todo extends Task {
         Pattern pattern = Pattern.compile("todo (.*)");
         Matcher matcher = pattern.matcher(description);
         if (matcher.matches()) {
-            return matcher.group(1);
+            String item = matcher.group(1).trim();
+            if (item.isEmpty()) {
+                throw new MissingTaskException();
+            }
+            return item;
         } else {
             throw new MissingTaskException();
         }

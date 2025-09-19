@@ -50,8 +50,11 @@ public class Deadline extends Task {
         Pattern pattern = Pattern.compile("deadline (.*?) /by (.*?)");
         Matcher matcher = pattern.matcher(description);
         if (matcher.matches()) {
-            String item = matcher.group(1);
-            String deadline = matcher.group(2);
+            String item = matcher.group(1).trim();
+            String deadline = matcher.group(2).trim();
+            if (item.isEmpty() || deadline.isEmpty()) {
+                throw new MissingTaskException();
+            }
             return new String[]{item, deadline};
         } else {
             throw new MissingTaskException();

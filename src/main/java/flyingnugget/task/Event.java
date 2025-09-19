@@ -54,9 +54,12 @@ public class Event extends Task {
         Pattern pattern = Pattern.compile("event (.*?) /from (.*?) /to (.*)");
         Matcher matcher = pattern.matcher(description);
         if (matcher.matches()) {
-            String item = matcher.group(1);
-            String start = matcher.group(2);
-            String end = matcher.group(3);
+            String item = matcher.group(1).trim();
+            String start = matcher.group(2).trim();
+            String end = matcher.group(3).trim();
+            if (item.isEmpty() || start.isEmpty() || end.isEmpty()) {
+                throw new MissingTaskException();
+            }
             return new String[]{item, start, end};
         } else {
             throw new MissingTaskException();
